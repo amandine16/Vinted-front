@@ -5,33 +5,38 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const HomeContainer = () => {
-  // Articles est à vide au départ
+  // infosArticles est à vide au départ
   const [infosArticles, setInfosArticles] = useState([]);
-  // Création de la fonction pour lancer la requete axios
+  // variable qui va passer à false quand la requete sera aboutie
+  const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect nous permet de lancer la requete qu'une seule fois
   useEffect(() => {
+    // Fonction qui lance la requete axios
     const fetchArticles = async () => {
       // toujours utiliser un trycatch lors d'une requête
       try {
+        // Création de la requete axios
         const response = await axios.get(
           "https://lereacteur-vinted-api.herokuapp.com/offers"
           // "https://vinted-projet-backend.herokuapp.com/offers/"
         );
         setInfosArticles(response.data.offers);
+        setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchArticles();
   }, []);
-  //   console.log(infosArticles);
-  return (
+  return isLoading ? (
+    <span>En cours de chargement ...</span>
+  ) : (
     <div className="HomeContainer">
       {infosArticles.map((info, index) => {
-        console.log(info);
         return (
-          <Link to={`/offer/${info._id}`}>
-            <div className="card-article" id={info._id} key={info._id}>
+          <Link to={`/offer/${info._id}`} key={index}>
+            <div className="card-article" id={info._id} key={index}>
               <div className="owner">
                 {info.owner.account.avatar && (
                   <img src={info.owner.account.avatar.secure_url} alt="" />
