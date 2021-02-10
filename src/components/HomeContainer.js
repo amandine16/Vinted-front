@@ -14,8 +14,8 @@ const HomeContainer = () => {
       // toujours utiliser un trycatch lors d'une requête
       try {
         const response = await axios.get(
-          // "https://lereacteur-vinted-api.herokuapp.com/offers"
-          "https://vinted-projet-backend.herokuapp.com/offers/"
+          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          // "https://vinted-projet-backend.herokuapp.com/offers/"
         );
         setInfosArticles(response.data.offers);
       } catch (error) {
@@ -32,8 +32,6 @@ const HomeContainer = () => {
         return (
           <Link to={`/offer/${info._id}`}>
             <div className="card-article" id={info._id} key={info._id}>
-              {/* {info.owner((owner, index) => { */}
-              {/* return ( */}
               <div className="owner">
                 {info.owner.account.avatar && (
                   <img src={info.owner.account.avatar.secure_url} alt="" />
@@ -41,8 +39,7 @@ const HomeContainer = () => {
 
                 <span>{info.owner.account.username}</span>
               </div>
-              {/* ); */}
-              {/* })} */}
+
               <div className="product-picture-infos">
                 <img src={info.product_image.secure_url} alt="" />
                 <div className="product_size-brand-price">
