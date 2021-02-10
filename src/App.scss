@@ -84,5 +84,11 @@ $green: #2baeb7;
     flex-wrap: wrap;
     margin: 30px auto;
     border: 1px solid $green;
+    .card-article {
+      width: 235px;
+      //   padding: 0 6px 16px;
+      cursor: pointer;
+      border: 1px solid $green;
+    }
   }
 }

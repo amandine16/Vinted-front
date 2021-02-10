@@ -6,28 +6,39 @@ const HomeContainer = () => {
   // Articles est à vide au départ
   const [infosArticles, setInfosArticles] = useState([]);
   // Création de la fonction pour lancer la requete axios
-  const fetchArticles = async () => {
-    // toujours utiliser un trycatch lors d'une requête
-    try {
-      const response = await axios.get(
-        "https://lereacteur-vinted-api.herokuapp.com/offers"
-      );
-      setInfosArticles(response.data.offers);
-      console.log(infosArticles);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   useEffect(() => {
+    const fetchArticles = async () => {
+      // toujours utiliser un trycatch lors d'une requête
+      try {
+        const response = await axios.get(
+          "https://lereacteur-vinted-api.herokuapp.com/offers"
+        );
+        setInfosArticles(response.data.offers);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     fetchArticles();
-  }, [infosArticles]);
+  }, []);
+  console.log(infosArticles);
   return (
     <div className="HomeContainer">
-      {infosArticles.map((elem, index) => {
+      {infosArticles.map((info, index) => {
+        // console.log(info.owner);
         return (
-          <div className="card-article">
-            <div className="name-seller"></div>
+          <div className="card-article" id={info.id} key={info._id}>
+            {/* {info.owner((owner, index) => { */}
+            {/* return ( */}
+            <div className="owner">
+              <div className="avatar-seller"></div>
+              <div className="name-seller"></div>
+            </div>
+            {/* ); */}
+            {/* })} */}
+
+            <div className="product_name">{info.product_name}</div>
+            <div className="product_price">{info.price}</div>
           </div>
         );
       })}
