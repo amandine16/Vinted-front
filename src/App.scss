@@ -1,0 +1,88 @@
+//********//
+//COULEURS//
+//********//
+$green: #2baeb7;
+
+//********//
+//  HOME //
+//********//
+.Home {
+  .Header {
+    .topHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: auto;
+      padding: 10px 0;
+      .logo-vinted {
+        cursor: pointer;
+        img {
+          height: 40px;
+        }
+      }
+      .search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .input-search {
+          width: 590px;
+          padding-left: 40px;
+          background-color: #f5f6f7;
+          border-radius: 5px;
+          height: 37px;
+          border: none;
+          outline: none;
+          // font-family: "Maison Neue";
+          font-size: 16px;
+        }
+      }
+    }
+    .HeaderHero {
+      position: relative;
+
+      .imgFond-hero {
+        background-image: url(../src/assets/img/home-hero.jpg);
+        height: 455px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+      }
+      .card-hero {
+        width: 415px;
+        height: 275px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        position: absolute;
+        top: 80px;
+        left: 80px;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        h1 {
+          font-size: 34px;
+          font-weight: 400;
+        }
+        button {
+          background-color: $green;
+          height: 45px;
+          width: 187px;
+          border-radius: 4px;
+          color: #fff;
+          font-size: 16px;
+          border: none;
+          padding: 0 14px;
+          margin-top: 32px;
+        }
+      }
+    }
+  }
+  .HomeContainer {
+    max-width: 1280px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px auto;
+    border: 1px solid $green;
+  }
+}
