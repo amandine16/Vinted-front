@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import HomeContainer from "../components/HomeContainer";
 
@@ -9,7 +8,6 @@ const Home = () => {
       <Header />
       {/* les articles en vente */}
       <HomeContainer />
-      <Link to="/offer">Offer</Link>
     </div>
   );
 };

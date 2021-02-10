@@ -1,5 +1,8 @@
+import { useParams } from "react-router-dom";
+
 const Offer = () => {
-  return <div className="Offer">Offer</div>;
+  const { id } = useParams();
+  return <div className="Offer">Offer {id}</div>;
 };
 
 export default Offer;
