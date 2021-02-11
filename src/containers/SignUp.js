@@ -12,6 +12,7 @@ const SignUp = ({ setUser, setUserToken }) => {
   const history = useHistory();
   //   ici on va récupérer les infos renvoyé par le serveur, une fois le user inscris
   const [infosUser, setInfosUser] = useState("");
+  console.log(infosUser);
   //   const [isLoading, setIsLoading] = useState(true)
 
   const handleSubmit = (e) => {

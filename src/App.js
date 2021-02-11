@@ -11,6 +11,7 @@ import { useState } from "react";
 function App() {
   // Ici je stock le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
   const [userToken, setUserToken] = useState();
+  console.log(userToken);
   const setUser = (token) => {
     if (token) {
       // Je crée le Cookie
@@ -19,7 +20,7 @@ function App() {
       setUserToken(token);
       console.log("token reçu");
     } else {
-      // sinon je supprime le cookie
+      // Je supprime le cookie quand l'utilisateur se deconnecte
       console.log("token non existant");
     }
   };
