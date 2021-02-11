@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const SignUp = ({ setUser, setUserToken }) => {
+const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
   // State pour le form
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -10,10 +10,7 @@ const SignUp = ({ setUser, setUserToken }) => {
   const [phone, setPhone] = useState("");
   const [check, setCheck] = useState(false);
   const history = useHistory();
-  //   ici on va récupérer les infos renvoyé par le serveur, une fois le user inscris
-  const [infosUser, setInfosUser] = useState("");
-  console.log(infosUser);
-  //   const [isLoading, setIsLoading] = useState(true)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,22 +27,17 @@ const SignUp = ({ setUser, setUserToken }) => {
             password: password,
           }
         );
+        // Je stocke dans le state les infos du user
         setInfosUser(response.data);
-        // setIsLoading(false)
-        // Une fois l'inscription réalisée, je stocke le token
-        const token = response.data.token;
-        // je le stocke dans le state
-        setUserToken(token);
-        history.push("/");
-        console.log(token);
-        // Le token sera ensuite utilisé pour la fonction qui gère le cookie
-        setUser(token);
+       
+        // Une fois l'inscription réalisée, je redirige vers la page de connexion
+        history.push("/user/login");
+       
       } catch (error) {
         console.log(error.message);
       }
     };
     infoUserInscris();
-    // }, []);
   };
   const handleUserName = (e) => {
     setUsername(e.target.value);

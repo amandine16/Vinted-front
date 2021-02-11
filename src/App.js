@@ -6,12 +6,16 @@ import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 import SignUp from "./containers/SignUp";
 import Header from "./components/Header";
+import Login from "./containers/Login";
 import { useState } from "react";
 
 function App() {
   // Ici je stock le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
   const [userToken, setUserToken] = useState();
+  //   ici on va récupérer les infos renvoyé par le serveur
+  const [infosUser, setInfosUser] = useState("");
   console.log(userToken);
+  console.log(infosUser)
   const setUser = (token) => {
     if (token) {
       // Je crée le Cookie
@@ -22,6 +26,7 @@ function App() {
     } else {
       // Je supprime le cookie quand l'utilisateur se deconnecte
       console.log("token non existant");
+      
     }
   };
   return (
@@ -32,7 +37,14 @@ function App() {
           <Offer />
         </Route>
         <Route path="/user/signup/">
-          <SignUp setUser={setUser} setUserToken={setUserToken} />
+          <SignUp setInfosUser={setInfosUser} />
+        </Route>
+        <Route path="/user/login/">
+          <Login
+            setInfosUser={setInfosUser}
+            setUser={setUser}
+            setUserToken={setUserToken}
+          />
         </Route>
         <Route path="/">
           <Home />
