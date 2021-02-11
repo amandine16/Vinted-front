@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const SignUp = () => {
+const SignUp = ({ setUser, setUserToken }) => {
   // State pour le form
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [check, setCheck] = useState(false);
   //   ici on va récupérer les infos renvoyé par le serveur, une fois le user inscris
-  const [user, setUser] = useState();
+  const [infosUser, setInfosUser] = useState("");
   //   const [isLoading, setIsLoading] = useState(true)
 
   const handleSubmit = (e) => {
@@ -21,14 +21,21 @@ const SignUp = () => {
           //   "https://lereacteur-vinted-api.herokuapp.com/user/signup"
           "https://vinted-projet-backend.herokuapp.com/user/signup",
           {
-            email: username,
-            username: email,
+            email: email,
+            username: username,
             phone: phone,
             password: password,
           }
         );
-        setUser(response.data);
+        setInfosUser(response.data);
         // setIsLoading(false)
+        // Une fois l'inscription réalisée, je stocke le token
+        const token = response.data.token;
+        // je le stocke dans le state
+        setUserToken(token);
+        console.log(token);
+        // Le token sera ensuite utilisé pour la fonction qui gère le cookie
+        setUser(token);
       } catch (error) {
         console.log(error.message);
       }
