@@ -3,10 +3,19 @@
 //********//
 $green: #2baeb7;
 $text-grey: #999;
+$pink: #fcced3;
 //********//
 //  HOME //
 //********//
-
+p,
+span,
+button,
+input {
+  font-family: "Font";
+}
+button {
+  cursor: pointer;
+}
 .Header {
   .topHeader {
     display: flex;
@@ -37,6 +46,29 @@ $text-grey: #999;
         font-size: 16px;
       }
     }
+    .btn-signup-header,
+    .btn-login-header,
+    .btn-buy-header {
+      height: 30px;
+      width: 115px;
+      border: 1px solid $green;
+      border-radius: 5px;
+      font-family: "Maison Neue";
+      font-size: 12px;
+      outline: none;
+    }
+    .btn-signup-header,
+    .btn-login-header {
+      background-color: #fff;
+      color: $green;
+    }
+    .btn-signup-header {
+      margin-right: 20px;
+    }
+    .btn-buy-header {
+      background-color: $green;
+      color: white;
+    }
   }
 }
 .HeaderHero {
@@ -64,6 +96,7 @@ $text-grey: #999;
     h1 {
       font-size: 34px;
       font-weight: 400;
+      font-family: "Font";
     }
     button {
       background-color: $green;
@@ -191,6 +224,54 @@ $text-grey: #999;
             margin-right: 10px;
           }
         }
+      }
+    }
+  }
+}
+.SignUp {
+  display: flex;
+  height: 100vh;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-family: "Font";
+  h2 {
+    font-size: 24px;
+  }
+  .form-signup {
+    display: flex;
+    flex-direction: column;
+    max-width: 20vw;
+    margin: 20px 0;
+    input {
+      border: none;
+      border-bottom: 1px solid $pink;
+      height: 35px;
+      margin-bottom: 20px;
+      outline: none;
+      padding: 1px 2px;
+      ::placeholder {
+        color: $text-grey;
+      }
+    }
+
+    .newLetter-signup {
+      width: 100%;
+      input[type="checkbox"] {
+        margin: 0;
+        padding: 0;
+        width: 20px;
+        cursor: pointer;
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      span {
+        margin-left: 20px;
       }
     }
   }
