@@ -1,6 +1,7 @@
 import "./App.scss";
 import "./assets/css/font.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 import SignUp from "./containers/SignUp";
@@ -12,7 +13,10 @@ function App() {
   const [userToken, setUserToken] = useState();
   const setUser = (token) => {
     if (token) {
-      // j'ajoute le token dans le cookie
+      // Je crée le Cookie
+      Cookies.set("userTokenCookie", token, { expires: 7 });
+      // je mets à jour le state token, pour etre dispo dans les autres pages
+      setUserToken(token);
       console.log("token reçu");
     } else {
       // sinon je supprime le cookie

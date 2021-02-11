@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = ({ setUser, setUserToken }) => {
@@ -8,6 +9,7 @@ const SignUp = ({ setUser, setUserToken }) => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [check, setCheck] = useState(false);
+  const history = useHistory();
   //   ici on va récupérer les infos renvoyé par le serveur, une fois le user inscris
   const [infosUser, setInfosUser] = useState("");
   //   const [isLoading, setIsLoading] = useState(true)
@@ -33,6 +35,7 @@ const SignUp = ({ setUser, setUserToken }) => {
         const token = response.data.token;
         // je le stocke dans le state
         setUserToken(token);
+        history.push("/");
         console.log(token);
         // Le token sera ensuite utilisé pour la fonction qui gère le cookie
         setUser(token);
