@@ -25,10 +25,9 @@ const Login = ({ setUser, setUserToken, setInfosUser }) => {
         // Je stocke le token dans le state
         const token = response.data.token;
         setUserToken(token);
-        // J'envoie le token à la fonction qui crée le cookie
+        // J'envoie le token à la fonction qui crée le cookies
         setUser(token);
-
-        // Une fois la connexion réalisée, je redirige vers la page de connexion
+        // Une fois la connexion réalisée, je redirige vers la page d'accueil
         history.push("/");
       } catch (error) {
         console.log(error.message);

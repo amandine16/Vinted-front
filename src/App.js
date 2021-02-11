@@ -10,12 +10,12 @@ import Login from "./containers/Login";
 import { useState } from "react";
 
 function App() {
-  // Ici je stock le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
+  // Ici je stocke le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
   const [userToken, setUserToken] = useState();
-  //   ici on va récupérer les infos renvoyé par le serveur
+  // Ici on va récupérer les infos du user, renvoyé par le serveur
   const [infosUser, setInfosUser] = useState("");
   console.log(userToken);
-  console.log(infosUser)
+  console.log(infosUser);
   const setUser = (token) => {
     if (token) {
       // Je crée le Cookie
@@ -26,12 +26,14 @@ function App() {
     } else {
       // Je supprime le cookie quand l'utilisateur se deconnecte
       console.log("token non existant");
-      
+      Cookies.remove("userTokenCookie");
+      setUserToken(null);
     }
   };
   return (
     <Router>
-      <Header />
+      {/* J'envoie à mon header, la fonction et mon token */}
+      <Header userToken={userToken} setUser={setUser} />
       <Switch>
         <Route path="/offer/:id">
           <Offer />

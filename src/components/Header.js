@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logoVinted from "../assets/img/logo-vinted.png";
 
-const Header = () => {
+const Header = ({ userToken, setUser }) => {
   return (
     <div className="Header">
       <div className="topHeader">
@@ -22,12 +22,21 @@ const Header = () => {
           </div>
         </div>
         <div className="connexion-container">
-          <Link to="/user/signup">
-            <button className="btn-signup-header">S'inscrire</button>
-          </Link>
-          <Link to="/user/login">
-            <button className="btn-login-header">Se connecter</button>
-          </Link>
+          {/* Si le token existe, j'affiche que le btn de deconnexion */}
+          {userToken ? (
+            <button className="btn-deconnexion" onClick={() => setUser(null)}>
+              Deconnexion
+            </button>
+          ) : (
+            <>
+              <Link to="/user/signup">
+                <button className="btn-signup-header">S'inscrire</button>
+              </Link>
+              <Link to="/user/login">
+                <button className="btn-login-header">Se connecter</button>
+              </Link>
+            </>
+          )}
         </div>
         <div className="btn-buy">
           <button className="btn-buy-header">Vends tes articles</button>
