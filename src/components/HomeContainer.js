@@ -18,8 +18,8 @@ const HomeContainer = () => {
       try {
         // Création de la requete axios
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
-          // "https://vinted-projet-backend.herokuapp.com/offers/"
+          // "https://lereacteur-vinted-api.herokuapp.com/offers"
+          "https://vinted-projet-backend.herokuapp.com/offers/"
         );
         setInfosArticles(response.data.offers);
         setIsLoading(false);

@@ -6,6 +6,7 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [check, setCheck] = useState(false);
   //   ici on va récupérer les infos renvoyé par le serveur, une fois le user inscris
   const [user, setUser] = useState();
@@ -13,12 +14,18 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    // useEffect(() => {
     const infoUserInscris = async () => {
       try {
         const response = await axios.post(
           //   "https://lereacteur-vinted-api.herokuapp.com/user/signup"
-          "https://vinted-projet-backend.herokuapp.com/user/signup/"
+          "https://vinted-projet-backend.herokuapp.com/user/signup",
+          {
+            email: username,
+            username: email,
+            phone: phone,
+            password: password,
+          }
         );
         setUser(response.data);
         // setIsLoading(false)
@@ -27,6 +34,7 @@ const SignUp = () => {
       }
     };
     infoUserInscris();
+    // }, []);
   };
   const handleUserName = (e) => {
     setUsername(e.target.value);
@@ -36,6 +44,9 @@ const SignUp = () => {
   };
   const handlePassword = (e) => {
     setPassword(e.target.value);
+  };
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
   };
   const handleCheck = (e) => {
     setCheck(e.target.checked);
@@ -66,6 +77,13 @@ const SignUp = () => {
             onChange={handlePassword}
             value={password}
             placeholder="Mot de passe"
+          />
+          {/* phone */}
+          <input
+            type="text"
+            onChange={handlePhone}
+            value={phone}
+            placeholder="Numéro de téléphone"
           />
           <div className="newLetter-signup">
             <div className="check">
