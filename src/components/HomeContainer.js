@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const HomeContainer = ({ setCheckOrder, checkOrder }) => {
+const HomeContainer = ({ checkOrder, priceMax, priceMin, search, filters }) => {
   // infosArticles est à vide au départ
   const [infosArticles, setInfosArticles] = useState([]);
   // variable qui va passer à false quand la requete sera aboutie
@@ -12,21 +12,15 @@ const HomeContainer = ({ setCheckOrder, checkOrder }) => {
 
   //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
   let request = "";
-  !checkOrder
-    ? (request =
-        "https://vinted-projet-backend.herokuapp.com/offers/?sort=price-asc")
-    : (request =
-        "https://vinted-projet-backend.herokuapp.com/offers/?sort=price-desc");
+  // filters.checkOrder
+  request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`;
+  //https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`
 
   //REQUEST AXIOS//
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get(
-          request
-          // "https://lereacteur-vinted-api.herokuapp.com/offers"
-          // "https://vinted-projet-backend.herokuapp.com/offers/"
-        );
+        const response = await axios.get(request);
         setInfosArticles(response.data.offers);
         setIsLoading(false);
       } catch (error) {

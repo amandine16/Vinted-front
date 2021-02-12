@@ -15,7 +15,17 @@ function App() {
     Cookies.get("CookieUserToken") || null
   );
   // State qui filtre par ordreCroissant ou déCroissant
-  const [checkOrder, setCheckOrder] = useState(false);
+  const [checkOrder, setCheckOrder] = useState("price-asc");
+  // Par défaut, on défini les prix max et min
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(100);
+  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState({
+    checkOrder: checkOrder,
+    priceMin: priceMin,
+    priceMax: priceMax,
+    search: search,
+  });
 
   // State de msg d'erreur pour login + signup
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,6 +50,14 @@ function App() {
         setUser={setUser}
         setCheckOrder={setCheckOrder}
         checkOrder={checkOrder}
+        priceMax={priceMax}
+        priceMin={priceMin}
+        setPriceMax={setPriceMax}
+        setPriceMin={setPriceMin}
+        setSearch={setSearch}
+        search={search}
+        setFilters={setFilters}
+        filters={filters}
       />
       <Switch>
         <Route path="/offer/:id">
@@ -60,7 +78,13 @@ function App() {
           />
         </Route>
         <Route path="/">
-          <Home setCheckOrder={setCheckOrder} checkOrder={checkOrder} />
+          <Home
+            checkOrder={checkOrder}
+            priceMax={priceMax}
+            priceMin={priceMin}
+            search={search}
+            filters={filters}
+          />
         </Route>
       </Switch>
     </Router>
