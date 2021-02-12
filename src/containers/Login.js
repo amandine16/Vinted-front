@@ -2,7 +2,12 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({ setUser, setUserToken, setInfosUser }) => {
+const Login = ({
+  setUser,
+
+  errorMessage,
+  setErrorMessage,
+}) => {
   // State pour le form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,17 +25,22 @@ const Login = ({ setUser, setUserToken, setInfosUser }) => {
             password: password,
           }
         );
-        // Je récupère toutes les infos du user connecté
-        setInfosUser(response.data);
-        // Je stocke le token dans le state
-        const token = response.data.token;
-        setUserToken(token);
-        // J'envoie le token à la fonction qui crée le cookies
-        setUser(token);
-        // Une fois la connexion réalisée, je redirige vers la page d'accueil
-        history.push("/");
+        if (response.data.token) {
+          // Je stocke le token dans le state
+          const token = response.data.token;
+
+          // J'envoie le token à la fonction qui crée le cookies
+          setUser(token);
+          // Une fois la connexion réalisée, je redirige vers la page d'accueil
+          history.push("/");
+        } else {
+          setErrorMessage("Something went wrong, please try again");
+        }
       } catch (error) {
         console.log(error.message);
+        if (error.response) {
+          console.log(error.response.message);
+        }
       }
     };
     LoginRequest();
@@ -66,6 +76,7 @@ const Login = ({ setUser, setUserToken, setInfosUser }) => {
           {/* btn-connexion */}
           <button type="submit">Se connecter</button>
         </form>
+        <span style={{ color: "red" }}>{errorMessage}</span>
       </div>
     </div>
   );

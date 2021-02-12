@@ -12,7 +12,8 @@ const Header = ({ userToken, setUser }) => {
           <div className="input-search">
             <input type="text" placeholder="Rechercher des articles" />
           </div>
-          <div className="filters-containers">
+
+          <div className="filters-containers-price">
             <span>Trier par prix</span>
             <span className="checkbox">
               <input type="checkbox" />
@@ -21,6 +22,7 @@ const Header = ({ userToken, setUser }) => {
             <div className="cursor-filter">-----</div>
           </div>
         </div>
+
         <div className="connexion-container">
           {/* Si le token existe, j'affiche que le btn de deconnexion */}
           {userToken ? (

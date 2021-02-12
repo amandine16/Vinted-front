@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
-  // State pour le form
+const SignUp = ({ setUser, setErrorMessage, errorMessage }) => {
+  //STATE//
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,10 +11,8 @@ const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
   const [check, setCheck] = useState(false);
   const history = useHistory();
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // useEffect(() => {
     const infoUserInscris = async () => {
       try {
         const response = await axios.post(
@@ -27,18 +25,26 @@ const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
             password: password,
           }
         );
-        // Je stocke dans le state les infos du user
-        setInfosUser(response.data);
-       
-        // Une fois l'inscription réalisée, je redirige vers la page de connexion
-        history.push("/user/login");
-       
+        console.log(response.data);
+        if (response.data.token) {
+          // Une fois l'inscription réalisée, l'utilisateur est directement connecté et redirigé vers la homepage
+          setUser(response.data.token);
+          history.push("/");
+        } else {
+          setErrorMessage("Something went wrong, please try again");
+          console.log(errorMessage);
+        }
       } catch (error) {
         console.log(error.message);
+        if (error.response) {
+          console.log(error.response.message);
+        }
       }
     };
     infoUserInscris();
   };
+
+  //FUNCTION FOR INPUT FORM//
   const handleUserName = (e) => {
     setUsername(e.target.value);
   };
@@ -55,6 +61,7 @@ const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
     setCheck(e.target.checked);
   };
 
+  //FORM//
   return (
     <div className="SignUp">
       <h2>S'inscrire</h2>
@@ -103,6 +110,7 @@ const SignUp = ({ setUser, setUserToken, setInfosUser }) => {
           </div>
           {/* btn-inscription */}
           <button type="submit">S'inscrire</button>
+          <span style={{ color: "red" }}>{errorMessage}</span>
         </form>
       </div>
     </div>

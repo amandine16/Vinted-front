@@ -11,22 +11,22 @@ import { useState } from "react";
 
 function App() {
   // Ici je stocke le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
-  const [userToken, setUserToken] = useState();
-  // Ici on va récupérer les infos du user, renvoyé par le serveur
-  const [infosUser, setInfosUser] = useState("");
-  console.log(userToken);
-  console.log(infosUser);
+  const [userToken, setUserToken] = useState(
+    Cookies.get("CookieUserToken") || null
+  );
+
+  // State de msg d'erreur pour login + signup
+  const [errorMessage, setErrorMessage] = useState("");
+
   const setUser = (token) => {
     if (token) {
       // Je crée le Cookie
-      Cookies.set("userTokenCookie", token, { expires: 7 });
+      Cookies.set("CookieUserToken", token, { expires: 7 });
       // je mets à jour le state token, pour etre dispo dans les autres pages
       setUserToken(token);
-      console.log("token reçu");
     } else {
       // Je supprime le cookie quand l'utilisateur se deconnecte
-      console.log("token non existant");
-      Cookies.remove("userTokenCookie");
+      Cookies.remove("CookieUserToken");
       setUserToken(null);
     }
   };
@@ -39,13 +39,17 @@ function App() {
           <Offer />
         </Route>
         <Route path="/user/signup/">
-          <SignUp setInfosUser={setInfosUser} />
+          <SignUp
+            setErrorMessage={setErrorMessage}
+            errorMessage={errorMessage}
+            setUser={setUser}
+          />
         </Route>
         <Route path="/user/login/">
           <Login
-            setInfosUser={setInfosUser}
             setUser={setUser}
-            setUserToken={setUserToken}
+            setErrorMessage={setErrorMessage}
+            errorMessage={errorMessage}
           />
         </Route>
         <Route path="/">
