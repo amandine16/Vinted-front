@@ -19,25 +19,21 @@ const Login = ({
       try {
         const response = await axios.post(
           //   "https://lereacteur-vinted-api.herokuapp.com/user/login"
-          "https://vinted-projet-backend.herokuapp.com/user/login",
+          "https://vinted-projet-backend.herokuapp.com/user/login/",
           {
             email: email,
             password: password,
           }
         );
         if (response.data.token) {
-          // Je stocke le token dans le state
-          const token = response.data.token;
-
           // J'envoie le token à la fonction qui crée le cookies
-          setUser(token);
+          setUser(response.data.token);
           // Une fois la connexion réalisée, je redirige vers la page d'accueil
           history.push("/");
-        } else {
-          setErrorMessage("Something went wrong, please try again");
         }
       } catch (error) {
         console.log(error.message);
+        setErrorMessage("Something went wrong, please try again");
         if (error.response) {
           console.log(error.response.message);
         }

@@ -14,6 +14,8 @@ function App() {
   const [userToken, setUserToken] = useState(
     Cookies.get("CookieUserToken") || null
   );
+  // State qui filtre par ordreCroissant ou déCroissant
+  const [checkOrder, setCheckOrder] = useState(false);
 
   // State de msg d'erreur pour login + signup
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +35,12 @@ function App() {
   return (
     <Router>
       {/* J'envoie à mon header, la fonction et mon token */}
-      <Header userToken={userToken} setUser={setUser} />
+      <Header
+        userToken={userToken}
+        setUser={setUser}
+        setCheckOrder={setCheckOrder}
+        checkOrder={checkOrder}
+      />
       <Switch>
         <Route path="/offer/:id">
           <Offer />
@@ -53,7 +60,7 @@ function App() {
           />
         </Route>
         <Route path="/">
-          <Home />
+          <Home setCheckOrder={setCheckOrder} checkOrder={checkOrder} />
         </Route>
       </Switch>
     </Router>

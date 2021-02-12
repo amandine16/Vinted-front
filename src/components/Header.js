@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logoVinted from "../assets/img/logo-vinted.png";
 
-const Header = ({ userToken, setUser }) => {
+const Header = ({ userToken, setUser, setCheckOrder, checkOrder }) => {
   return (
     <div className="Header">
       <div className="topHeader">
@@ -12,7 +12,18 @@ const Header = ({ userToken, setUser }) => {
           <div className="input-search">
             <input type="text" placeholder="Rechercher des articles" />
           </div>
-
+          <span className="checkbox-order-price">
+            <div
+              className="btn-price-order-container"
+              onClick={() => {
+                setCheckOrder(checkOrder ? false : true);
+              }}
+            >
+              <div className="knob" style={{ left: checkOrder ? 23 : 2 }}>
+                {checkOrder ? <span>⇣</span> : <span>⇡</span>}
+              </div>
+            </div>
+          </span>
           <div className="filters-containers-price">
             <span>Trier par prix</span>
             <span className="checkbox">

@@ -45,6 +45,33 @@ button {
         // font-family: "Maison Neue";
         font-size: 16px;
       }
+      .checkbox-order-price {
+        .btn-price-order-container {
+          background-color: #2cb1ba;
+          border-radius: 10px;
+          width: 42px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          outline: none;
+          position: relative;
+          .knob {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #666;
+            border-radius: 100%;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            transition: left 0.1s ease-in-out 0s;
+            font-weight: 700;
+            font-size: 11px;
+          }
+        }
+      }
     }
     .btn-signup-header,
     .btn-login-header,

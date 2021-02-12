@@ -25,17 +25,15 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage }) => {
             password: password,
           }
         );
-        console.log(response.data);
         if (response.data.token) {
           // Une fois l'inscription réalisée, l'utilisateur est directement connecté et redirigé vers la homepage
           setUser(response.data.token);
           history.push("/");
-        } else {
-          setErrorMessage("Something went wrong, please try again");
-          console.log(errorMessage);
         }
       } catch (error) {
         console.log(error.message);
+        setErrorMessage("Something went wrong, please try again");
+
         if (error.response) {
           console.log(error.response.message);
         }

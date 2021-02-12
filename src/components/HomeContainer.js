@@ -4,22 +4,28 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const HomeContainer = () => {
+const HomeContainer = ({ setCheckOrder, checkOrder }) => {
   // infosArticles est à vide au départ
   const [infosArticles, setInfosArticles] = useState([]);
   // variable qui va passer à false quand la requete sera aboutie
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect nous permet de lancer la requete qu'une seule fois
+  //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
+  let request = "";
+  !checkOrder
+    ? (request =
+        "https://vinted-projet-backend.herokuapp.com/offers/?sort=price-asc")
+    : (request =
+        "https://vinted-projet-backend.herokuapp.com/offers/?sort=price-desc");
+
+  //REQUEST AXIOS//
   useEffect(() => {
-    // Fonction qui lance la requete axios
     const fetchArticles = async () => {
-      // toujours utiliser un trycatch lors d'une requête
       try {
-        // Création de la requete axios
         const response = await axios.get(
+          request
           // "https://lereacteur-vinted-api.herokuapp.com/offers"
-          "https://vinted-projet-backend.herokuapp.com/offers/"
+          // "https://vinted-projet-backend.herokuapp.com/offers/"
         );
         setInfosArticles(response.data.offers);
         setIsLoading(false);
@@ -28,7 +34,9 @@ const HomeContainer = () => {
       }
     };
     fetchArticles();
-  }, []);
+  }, [request]);
+
+  //RETURN//
   return isLoading ? (
     <span>En cours de chargement ...</span>
   ) : (
