@@ -1,5 +1,5 @@
-import "./App.scss";
 import "./assets/css/font.css";
+import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import Home from "./containers/Home";
@@ -14,17 +14,16 @@ function App() {
   const [userToken, setUserToken] = useState(
     Cookies.get("CookieUserToken") || null
   );
-  // State qui filtre par ordreCroissant ou déCroissant
-  const [checkOrder, setCheckOrder] = useState("price-asc");
-  // Par défaut, on défini les prix max et min
-  const [priceMin, setPriceMin] = useState(0);
-  const [priceMax, setPriceMax] = useState(100);
-  const [search, setSearch] = useState("");
+
+  // State pour afficher message quand aucun article trouvé
+  const [messageNotFoundArticles, setMessageNotFoundArticles] = useState("");
+
+  // Mes filtres par defaut
   const [filters, setFilters] = useState({
-    checkOrder: checkOrder,
-    priceMin: priceMin,
-    priceMax: priceMax,
-    search: search,
+    checkOrder: "price-asc",
+    priceMin: 0,
+    priceMax: 100,
+    search: "",
   });
 
   // State de msg d'erreur pour login + signup
@@ -48,14 +47,6 @@ function App() {
       <Header
         userToken={userToken}
         setUser={setUser}
-        setCheckOrder={setCheckOrder}
-        checkOrder={checkOrder}
-        priceMax={priceMax}
-        priceMin={priceMin}
-        setPriceMax={setPriceMax}
-        setPriceMin={setPriceMin}
-        setSearch={setSearch}
-        search={search}
         setFilters={setFilters}
         filters={filters}
       />
@@ -79,11 +70,9 @@ function App() {
         </Route>
         <Route path="/">
           <Home
-            checkOrder={checkOrder}
-            priceMax={priceMax}
-            priceMin={priceMin}
-            search={search}
             filters={filters}
+            messageNotFoundArticles={messageNotFoundArticles}
+            setMessageNotFoundArticles={setMessageNotFoundArticles}
           />
         </Route>
       </Switch>

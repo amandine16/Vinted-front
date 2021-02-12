@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+import avatarDefault from "../assets/img/avatarDefault.png";
 import axios from "axios";
 
 const Offer = () => {
@@ -12,10 +12,11 @@ const Offer = () => {
     const fetchArticle = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `https://vinted-projet-backend.herokuapp.com/offer/${id}`
         );
         setArticle(response.data);
         setIsLoading(false);
+        console.log(response.data);
       } catch (error) {
         console.log(error.message);
       }
@@ -27,12 +28,13 @@ const Offer = () => {
     <span>En chargement ...</span>
   ) : (
     <>
-      <Header />
       <div className="Offer">
         <div className="offerContent">
           {/* photo de l'annonce */}
           <div className="offer-picture">
-            <img src={article.product_image.secure_url} alt="" />
+            {article.product_image && (
+              <img src={article.product_image.secure_url} alt="" />
+            )}
           </div>
 
           {/* card d'infos de l'annonce */}
@@ -66,16 +68,17 @@ const Offer = () => {
               <p className="name-product">{article.product_name}</p>
               <p className="description">{article.product_description}</p>
               <div className="offer-user">
+                {/* {article.owner.account.avatar && ( */}
                 <img
                   src={
-                    article.owner.account.avatar &&
-                    article.owner.account.avatar.secure_url
+                    article.owner.account.avatar
+                      ? article.owner.account.avatar.secure_url
+                      : avatarDefault
                   }
-                  alt={
-                    article.owner.account.username &&
-                    article.owner.account.username
-                  }
+                  alt={article.owner.account.username}
                 />
+                {/* )} */}
+
                 <span className="nameSeller-offer">
                   {article.owner.account.username &&
                     article.owner.account.username}

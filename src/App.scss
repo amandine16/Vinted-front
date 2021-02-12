@@ -11,12 +11,15 @@ p,
 span,
 button,
 input {
-  font-family: "Font";
+  font-family: "Font" !important;
 }
 button {
   cursor: pointer;
 }
 .Header {
+  .barBetweenPrice {
+    background: $green !important;
+  }
   .topHeader {
     display: flex;
     align-items: center;

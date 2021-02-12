@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const HomeContainer = ({ checkOrder, priceMax, priceMin, search, filters }) => {
+const HomeContainer = ({
+  filters,
+  messageNotFoundArticles,
+  setMessageNotFoundArticles,
+}) => {
   // infosArticles est à vide au départ
   const [infosArticles, setInfosArticles] = useState([]);
   // variable qui va passer à false quand la requete sera aboutie
@@ -12,7 +16,6 @@ const HomeContainer = ({ checkOrder, priceMax, priceMin, search, filters }) => {
 
   //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
   let request = "";
-  // filters.checkOrder
   request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`;
   //https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`
 
@@ -23,18 +26,28 @@ const HomeContainer = ({ checkOrder, priceMax, priceMin, search, filters }) => {
         const response = await axios.get(request);
         setInfosArticles(response.data.offers);
         setIsLoading(false);
+        if (Object.keys(response.data.offers).length === 0) {
+          setMessageNotFoundArticles(
+            "Aucun article ne correspond à votre recherche"
+          );
+        }
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchArticles();
-  }, [request]);
+  }, [request, setMessageNotFoundArticles]);
 
   //RETURN//
   return isLoading ? (
     <span>En cours de chargement ...</span>
   ) : (
     <div className="HomeContainer">
+      {/* MESSAGE ARTICLE NOT FOUND */}
+      {messageNotFoundArticles && (
+        <div className="notFoundArticles">{messageNotFoundArticles}</div>
+      )}
+      {/* ARTICLES */}
       {infosArticles.map((info, index) => {
         return (
           <Link to={`/offer/${info._id}`} key={index}>
