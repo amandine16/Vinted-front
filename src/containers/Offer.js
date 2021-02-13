@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import avatarDefault from "../assets/img/avatarDefault.png";
 import axios from "axios";
+import UserEmptySvg from "../components/user-empty-state";
 
 const Offer = () => {
   const [article, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const keyDetails = [];
+
+  // REQUEST AXIOS //
   useEffect(() => {
     const fetchArticle = async () => {
       try {
@@ -30,28 +32,28 @@ const Offer = () => {
     <>
       <div className="Offer">
         <div className="offerContent">
-          {/* photo de l'annonce */}
+          {/* PICTURE */}
           <div className="offer-picture">
             {article.product_image && (
               <img src={article.product_image.secure_url} alt="" />
             )}
           </div>
 
-          {/* card d'infos de l'annonce */}
+          {/* CARD */}
           <div className="offer-infos">
             <div className="infos-offer">
               <div className="price-offer">{article.product_price} €</div>
 
-              {/* details de l'offre qu'on map car c'est un tableau */}
+              {/* DETAILS */}
               <ul className="details-offer">
                 {article.product_details.map((line, index) => {
                   // à chaque boucle, on push dans notre tableau keyDetails, la clef de l'objet bouclé
                   keyDetails.push(Object.keys(line));
                   return (
                     <>
-                      {/* si la clef existe, alors j'affiche la clef + sa valeur */}
+                      {/* IF KEY EXIST */}
                       {line[keyDetails[index]] && (
-                        <li>
+                        <li key={index} id={index}>
                           <span>{keyDetails[index]}</span>
                           <span>{line[keyDetails[index]]}</span>
                         </li>
@@ -63,21 +65,20 @@ const Offer = () => {
             </div>
 
             <div className="separator"></div>
-            {/* Info sur le vendeur */}
+
+            {/* OWNER */}
             <div className="description-offer">
               <p className="name-product">{article.product_name}</p>
               <p className="description">{article.product_description}</p>
               <div className="offer-user">
-                {/* {article.owner.account.avatar && ( */}
-                <img
-                  src={
-                    article.owner.account.avatar
-                      ? article.owner.account.avatar.secure_url
-                      : avatarDefault
-                  }
-                  alt={article.owner.account.username}
-                />
-                {/* )} */}
+                {article.owner.account.avatar ? (
+                  <img
+                    src={article.owner.account.avatar.secure_url}
+                    alt={article.owner.account.username}
+                  />
+                ) : (
+                  <UserEmptySvg />
+                )}
 
                 <span className="nameSeller-offer">
                   {article.owner.account.username &&
@@ -85,8 +86,8 @@ const Offer = () => {
                 </span>
               </div>
             </div>
-            {/* bouton Acheter */}
-            <button>Acheter</button>
+            {/* BTN TO BUY */}
+            <button className="btn-buy">Acheter</button>
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ const FilterBar = ({ rtl, filters, setFilters }) => {
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
+        marginLeft: "12px",
       }}
     >
       <Range
@@ -66,8 +67,8 @@ const FilterBar = ({ rtl, filters, setFilters }) => {
             {...props}
             style={{
               ...props.style,
-              height: "12px",
-              width: "12px",
+              height: "15px",
+              width: "15px",
               backgroundColor: "#2CB1BA",
               display: "flex",
               justifyContent: "center",

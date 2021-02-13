@@ -4,13 +4,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import Home from "./containers/Home";
 import Offer from "./containers/Offer";
-import SignUp from "./containers/SignUp";
 import Header from "./components/Header";
-import Login from "./containers/Login";
 import { useState } from "react";
+// FontAwesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch, faTimesCircle);
 
 function App() {
-  // Ici je stocke le token du user, et je le crée ici car je vais en avoir besoin dans différentes pages
+  // TOKEN IR FOR USE DIFFERENT PAGE
   const [userToken, setUserToken] = useState(
     Cookies.get("CookieUserToken") || null
   );
@@ -43,36 +45,31 @@ function App() {
   };
   return (
     <Router>
-      {/* J'envoie à mon header, la fonction et mon token */}
       <Header
         userToken={userToken}
         setUser={setUser}
         setFilters={setFilters}
         filters={filters}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
       />
       <Switch>
-        <Route path="/offer/:id">
-          <Offer />
+        <Route path="/offer/:id" component={Offer}>
+          {/* <Offer /> */}
         </Route>
-        <Route path="/user/signup/">
-          <SignUp
-            setErrorMessage={setErrorMessage}
-            errorMessage={errorMessage}
-            setUser={setUser}
-          />
-        </Route>
-        <Route path="/user/login/">
+        {/* <Route path="/user/login/">
           <Login
             setUser={setUser}
             setErrorMessage={setErrorMessage}
             errorMessage={errorMessage}
           />
-        </Route>
+        </Route> */}
         <Route path="/">
           <Home
             filters={filters}
             messageNotFoundArticles={messageNotFoundArticles}
             setMessageNotFoundArticles={setMessageNotFoundArticles}
+            setFilters={setFilters}
           />
         </Route>
       </Switch>

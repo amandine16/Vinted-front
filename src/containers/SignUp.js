@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SignUp = ({ setUser, setErrorMessage, errorMessage }) => {
+const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
   //STATE//
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -61,9 +62,16 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage }) => {
 
   //FORM//
   return (
-    <div className="SignUp">
-      <h2>S'inscrire</h2>
-      <div className="form-signup">
+    <div className="ModalConnexion">
+      <div className="form">
+        <div>
+          <span>S'inscrire</span>
+          <FontAwesomeIcon
+            icon="times-circle"
+            onClick={() => setModalSignUp(false)}
+          />
+        </div>
+
         <form onSubmit={handleSubmit}>
           {/* Username */}
           <input

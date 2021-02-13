@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // import pour créer des liens vers d'autres pages du site
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UserEmptySvg from "./user-empty-state";
 
 const HomeContainer = ({
   filters,
@@ -30,6 +31,8 @@ const HomeContainer = ({
           setMessageNotFoundArticles(
             "Aucun article ne correspond à votre recherche"
           );
+        } else {
+          setMessageNotFoundArticles("");
         }
       } catch (error) {
         console.log(error.message);
@@ -50,16 +53,20 @@ const HomeContainer = ({
       {/* ARTICLES */}
       {infosArticles.map((info, index) => {
         return (
-          <Link to={`/offer/${info._id}`} key={index}>
-            <div className="card-article" id={info._id} key={index}>
-              <div className="owner">
-                {info.owner.account.avatar && (
-                  <img src={info.owner.account.avatar.secure_url} alt="" />
-                )}
+          <div className="card-article" id={info._id} key={index}>
+            <div className="owner">
+              {info.owner.account.avatar ? (
+                <img
+                  src={info.owner.account.avatar.secure_url}
+                  alt={info.owner.account.username}
+                />
+              ) : (
+                <UserEmptySvg />
+              )}
 
-                <span>{info.owner.account.username}</span>
-              </div>
-
+              <span>{info.owner.account.username}</span>
+            </div>
+            <Link to={`/offer/${info._id}`} key={index}>
               <div className="product-picture-infos">
                 <img src={info.product_image.secure_url} alt="" />
                 <div className="product_size-brand-price">
@@ -72,8 +79,8 @@ const HomeContainer = ({
                   </span>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         );
       })}
     </div>

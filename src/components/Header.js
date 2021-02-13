@@ -1,100 +1,75 @@
 import { Link } from "react-router-dom";
-import FilterBar from "./FilterBar";
 import logoVinted from "../assets/img/logo-vinted.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import SignUp from "../containers/SignUp";
+import Login from "../containers/Login";
 
 const Header = ({
   userToken,
   setUser,
-
   filters,
   setFilters,
+  errorMessage,
+  setErrorMessage,
 }) => {
-  const handleChange = (input, e) => {
-    if (input === "inputSearch") {
-      const newFilters = { ...filters };
-      newFilters.search = e;
-      console.log(newFilters);
-      setFilters(newFilters);
-    }
-    if (input === "inputPriceMin") {
-      const newFilters = { ...filters };
-      newFilters.priceMin = e;
-      setFilters(newFilters);
-    }
-    if (input === "inputPriceMax") {
-      const newFilters = { ...filters };
-      newFilters.priceMax = e;
-      setFilters(newFilters);
+  // FUNCTION FOR FILTERS
+  const handleChange = (e) => {
+    const newFilters = { ...filters };
+    newFilters.search = e.target.value;
+    console.log(newFilters);
+    setFilters(newFilters);
+  };
+
+  const [modalSignUp, setModalSignUp] = useState(false);
+  const [modalLogin, setModalLogin] = useState(false);
+  // FUNCTION FOR MODAL
+  const handleClik = (typeModal) => {
+    if (typeModal === "signUp") {
+      modalSignUp ? setModalSignUp(false) : setModalSignUp(true);
+    } else if (typeModal === "login") {
+      modalLogin ? setModalLogin(false) : setModalLogin(true);
     }
   };
   return (
     <div className="Header">
       <div className="topHeader">
-        <div className="logo-vinted">
-          <img src={logoVinted} alt="logo Vinted" />
-        </div>
-        <div className="search-container">
-          {/* SEARCH */}
-          <div className="input-search">
-            <input
-              type="text"
-              value={filters.search}
-              onChange={(e) => handleChange("inputSearch", e.target.value)}
-              placeholder="Rechercher des articles"
-            />
+        <Link to="/">
+          <div className="logo-vinted">
+            <img src={logoVinted} alt="logo Vinted" />
           </div>
-
-          {/* CHECKBOX ORDER-PRICE */}
-          <span className="checkbox-order-price">
-            <div
-              className="btn-price-order-container"
-              onClick={() => {
-                const newFilters = { ...filters };
-                newFilters.checkOrder =
-                  newFilters.checkOrder === "price-asc"
-                    ? (newFilters.checkOrder = "price-desc")
-                    : (newFilters.checkOrder = "price-asc");
-                setFilters(newFilters);
-              }}
-            >
-              <div
-                className="knob"
-                style={{ left: filters.checkOrder === "price-asc" ? 2 : 23 }}
-              >
-                {filters.checkOrder === "price-desc" ? (
-                  <span>⇣</span>
-                ) : (
-                  <span>⇡</span>
-                )}
-              </div>
-            </div>
-          </span>
-
-          {/* PRICE BETWEEN */}
-          <div className="filters-containers-price">
-            <span>Trier par prix</span>
-            <span>Prix entre : </span>
-
-            <span>
-              <FilterBar filters={filters} setFilters={setFilters} />
-            </span>
-          </div>
+        </Link>
+        {/* SEARCH */}
+        <div className="input-search">
+          <input
+            type="text"
+            value={filters.search}
+            onChange={handleChange}
+            placeholder="Rechercher des articles"
+          />
+          <FontAwesomeIcon icon="search" />
         </div>
-
         <div className="connexion-container">
-          {/* Si le token existe, j'affiche que le btn de deconnexion */}
+          {/* IF TOKEN EXIST => BTN DECONNEXION*/}
           {userToken ? (
             <button className="btn-deconnexion" onClick={() => setUser(null)}>
               Deconnexion
             </button>
           ) : (
             <>
-              <Link to="/user/signup">
-                <button className="btn-signup-header">S'inscrire</button>
-              </Link>
-              <Link to="/user/login">
-                <button className="btn-login-header">Se connecter</button>
-              </Link>
+              <button
+                className="btn-signup-header"
+                onClick={() => handleClik("signUp")}
+              >
+                S'inscrire
+              </button>
+
+              <button
+                className="btn-login-header"
+                onClick={() => handleClik("login")}
+              >
+                Se connecter
+              </button>
             </>
           )}
         </div>
@@ -102,6 +77,23 @@ const Header = ({
           <button className="btn-buy-header">Vends tes articles</button>
         </div>
       </div>
+      {/* MODAL */}
+      {modalSignUp && (
+        <SignUp
+          setUser={setUser}
+          setErrorMessage={setErrorMessage}
+          errorMessage={errorMessage}
+          setModalSignUp={setModalSignUp}
+        />
+      )}
+      {modalLogin && (
+        <Login
+          setUser={setUser}
+          setErrorMessage={setErrorMessage}
+          errorMessage={errorMessage}
+          setModalLogin={setModalLogin}
+        />
+      )}
     </div>
   );
 };

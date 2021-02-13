@@ -1,43 +1,59 @@
-//********//
 //COULEURS//
-//********//
 $green: #2baeb7;
 $text-grey: #999;
 $pink: #fcced3;
-//********//
-//  HOME //
-//********//
+
+// GENERAL //
+a {
+  text-transform: none;
+  text-decoration: none;
+}
+*,
+div,
 p,
+a,
 span,
-button,
 input {
-  font-family: "Font" !important;
+  font-family: "Font";
 }
 button {
   cursor: pointer;
+  background-color: $green;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
 }
+button:hover {
+  background: #2699a1 !important;
+  transition: 0.3s;
+  color: white !important;
+}
+
+// HEADER //
 .Header {
-  .barBetweenPrice {
-    background: $green !important;
-  }
+  // FILTERS //
+
   .topHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 1280px;
     margin: auto;
-    padding: 10px 0;
+    padding-top: 10px;
     .logo-vinted {
       cursor: pointer;
       img {
         height: 40px;
       }
     }
-    .search-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .input-search {
+    .input-search {
+      position: relative;
+      margin-bottom: 35px;
+      ::placeholder {
+        color: #bbb;
+      }
+      input {
         width: 590px;
         padding-left: 40px;
         background-color: #f5f6f7;
@@ -45,11 +61,53 @@ button {
         height: 37px;
         border: none;
         outline: none;
-        // font-family: "Maison Neue";
         font-size: 16px;
       }
+      svg {
+        color: #bbb;
+        position: absolute;
+        width: 1em;
+        left: 12px;
+        top: 10px;
+      }
+    }
+
+    .btn-signup-header,
+    .btn-login-header,
+    .btn-buy-header {
+      height: 30px;
+      width: 115px;
+      border: 1px solid $green;
+      font-size: 12px;
+    }
+    .btn-signup-header,
+    .btn-login-header {
+      background-color: #fff;
+      color: $green;
+    }
+    .btn-signup-header {
+      margin-right: 20px;
+    }
+  }
+}
+
+.search-container {
+  max-width: 590px;
+  margin-left: 260px;
+  margin-bottom: 10px;
+
+  .filters-price {
+    display: flex;
+    font-size: 12px;
+    height: 25px;
+    align-items: center;
+    justify-content: space-between;
+    .checkbox-orderPrice-container {
+      display: flex;
+      align-items: center;
       .checkbox-order-price {
         .btn-price-order-container {
+          margin-left: 12px;
           background-color: #2cb1ba;
           border-radius: 10px;
           width: 42px;
@@ -76,40 +134,27 @@ button {
         }
       }
     }
-    .btn-signup-header,
-    .btn-login-header,
-    .btn-buy-header {
-      height: 30px;
-      width: 115px;
-      border: 1px solid $green;
-      border-radius: 5px;
-      font-family: "Maison Neue";
-      font-size: 12px;
-      outline: none;
-    }
-    .btn-signup-header,
-    .btn-login-header {
-      background-color: #fff;
-      color: $green;
-    }
-    .btn-signup-header {
-      margin-right: 20px;
-    }
-    .btn-buy-header {
-      background-color: $green;
-      color: white;
+    .filters-price-between {
+      display: flex;
+      align-items: center;
     }
   }
 }
+
+// HERO //
 .HeaderHero {
   position: relative;
-
   .imgFond-hero {
     background-image: url(../src/assets/img/home-hero.jpg);
     height: 455px;
     width: 100%;
     background-position: center;
     background-size: cover;
+    svg {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   }
   .card-hero {
     width: 415px;
@@ -141,36 +186,43 @@ button {
     }
   }
 }
+
+// OFFERS //
 .HomeContainer {
   max-width: 1280px;
   display: flex;
   flex-wrap: wrap;
   margin: 30px auto;
-  border: 1px solid $green;
+  .notFoundArticles {
+    width: 100%;
+    text-align: center;
+  }
   .card-article {
     margin: 10px 10px;
     width: 235px;
-    //   padding: 0 6px 16px;
-    cursor: pointer;
-    border: 1px solid $green;
     .owner {
       display: flex;
       align-items: center;
       padding: 10px;
-
+      min-height: 45px;
+      svg,
       img {
+        color: $text-grey;
         height: 25px;
         width: 25px;
         object-fit: cover;
         border-radius: 50%;
         margin-right: 10px;
       }
+
       span {
         color: $text-grey;
         font-size: 12px;
       }
     }
     .product-picture-infos {
+      cursor: pointer;
+
       img {
         height: 360px;
         width: 235px;
@@ -180,13 +232,22 @@ button {
         display: flex;
         flex-direction: column;
         padding: 8px;
+        color: #111;
+        font-size: 14px;
+        span:first-child {
+          margin-bottom: 5px;
+        }
         :not(span:first-child) {
           color: $text-grey;
+          font-size: 12px;
+          margin-bottom: 2px;
         }
       }
     }
   }
 }
+
+// ONE OFFER //
 .Offer {
   background-color: #eaedee;
   .offerContent {
@@ -242,46 +303,83 @@ button {
         }
         .description {
           color: $text-grey;
+          font-size: 14px;
         }
         .offer-user {
           display: flex;
           align-items: center;
-          img {
-            height: 50px;
-            width: 50px;
+          margin: 10px 10px 0 0;
+
+          img,
+          svg {
+            height: 25px;
+            width: 25px;
             object-fit: cover;
             border-radius: 50%;
             margin-right: 10px;
           }
         }
       }
+      .btn-buy {
+        padding: 15px;
+        font-size: 16px;
+      }
     }
   }
 }
-.SignUp {
+
+// SIGNUP //
+.ModalConnexion {
   display: flex;
   height: 100vh;
-  margin: 0 auto;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background: rgba(17, 17, 17, 0.48);
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   font-family: "Font";
-  h2 {
-    font-size: 24px;
+  button {
+    margin-top: 15px;
+    padding: 5px 15px;
   }
-  .form-signup {
+  .form {
+    > div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      span {
+        font-size: 24px;
+      }
+      svg {
+        color: $text-grey;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    margin: auto;
     display: flex;
     flex-direction: column;
-    max-width: 20vw;
-    margin: 20px 0;
+    justify-content: space-evenly;
+    max-width: 320px;
+    max-height: 70vh;
+    background: white;
+    padding: 35px;
+    border-radius: 5px;
+
     input {
       border: none;
       border-bottom: 1px solid $pink;
       height: 35px;
       margin-bottom: 20px;
       outline: none;
-      padding: 1px 2px;
+      padding: 2px 0;
+      width: 100%;
       ::placeholder {
         color: $text-grey;
       }
@@ -289,16 +387,21 @@ button {
 
     .newLetter-signup {
       width: 100%;
+      p {
+        font-size: 12px;
+        text-align: justify;
+      }
       input[type="checkbox"] {
         margin: 0;
         padding: 0;
         width: 20px;
+        height: 20px;
         cursor: pointer;
       }
       .check {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        margin: 10px 0;
       }
       span {
         margin-left: 20px;
