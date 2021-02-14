@@ -26,6 +26,8 @@ function App() {
     priceMin: 0,
     priceMax: 100,
     search: "",
+    page: 1,
+    limit: 5,
   });
 
   // State de msg d'erreur pour login + signup

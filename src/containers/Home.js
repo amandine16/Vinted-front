@@ -18,6 +18,7 @@ const Home = ({
         {/* les articles en vente */}
         <HomeContainer
           filters={filters}
+          setFilters={setFilters}
           messageNotFoundArticles={messageNotFoundArticles}
           setMessageNotFoundArticles={setMessageNotFoundArticles}
         />

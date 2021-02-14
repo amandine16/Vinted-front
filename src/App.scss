@@ -29,6 +29,43 @@ button:hover {
   transition: 0.3s;
   color: white !important;
 }
+.center {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  span {
+    margin: 15px;
+    font-size: 12px;
+  }
+  .spinner > div {
+    width: 2rem;
+    height: 2rem;
+    background: $green;
+    border-radius: 50%;
+    display: inline-block;
+    animation: 1.5s bounce infinite ease-in-out both;
+    margin-right: 10px;
+  }
+  .spinner .bounce1 {
+    animation-delay: -0.3s;
+  }
+  .spinner .bounce2 {
+    animation-delay: -0.15s;
+  }
+
+  @keyframes bounce {
+    0%,
+    80%,
+    100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+}
 
 // HEADER //
 .Header {
@@ -190,58 +227,111 @@ button:hover {
 // OFFERS //
 .HomeContainer {
   max-width: 1280px;
-  display: flex;
-  flex-wrap: wrap;
   margin: 30px auto;
-  .notFoundArticles {
-    width: 100%;
-    text-align: center;
-  }
-  .card-article {
-    margin: 10px 10px;
-    width: 235px;
-    .owner {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      min-height: 45px;
-      svg,
-      img {
-        color: $text-grey;
-        height: 25px;
-        width: 25px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
+  .NbArticleSelected {
+    text-align: right;
+    margin-right: 15px;
+    font-size: 12px;
+    color: $text-grey;
 
-      span {
-        color: $text-grey;
-        font-size: 12px;
-      }
+    label {
+      margin-right: 10px;
     }
-    .product-picture-infos {
-      cursor: pointer;
-
-      img {
-        height: 360px;
-        width: 235px;
-        object-fit: cover;
-      }
-      .product_size-brand-price {
+    select {
+      background: #2baeb7;
+      border: none;
+      border-radius: 50%;
+      outline: none;
+      font-size: 12px;
+      appearance: none;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      text-align-last: center;
+    }
+    select::-ms-expand {
+      display: none;
+    }
+  }
+  .homeOffers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .notFoundArticles {
+      width: 100%;
+      text-align: center;
+    }
+    .card-article {
+      margin: 10px 10px;
+      width: 235px;
+      .owner {
         display: flex;
-        flex-direction: column;
-        padding: 8px;
-        color: #111;
-        font-size: 14px;
-        span:first-child {
-          margin-bottom: 5px;
+        align-items: center;
+        padding: 10px;
+        min-height: 45px;
+        svg,
+        img {
+          color: $text-grey;
+          height: 25px;
+          width: 25px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 10px;
         }
-        :not(span:first-child) {
+
+        span {
           color: $text-grey;
           font-size: 12px;
-          margin-bottom: 2px;
         }
+      }
+      .product-picture-infos {
+        cursor: pointer;
+
+        img {
+          height: 360px;
+          width: 235px;
+          object-fit: cover;
+        }
+        .product_size-brand-price {
+          display: flex;
+          flex-direction: column;
+          padding: 8px;
+          color: #111;
+          font-size: 14px;
+          span:first-child {
+            margin-bottom: 5px;
+          }
+          :not(span:first-child) {
+            color: $text-grey;
+            font-size: 12px;
+            margin-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+  .pagination {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      li {
+        cursor: pointer;
+        margin-right: 5px;
+        background: white;
+        width: 20px;
+        font-size: 12px;
+        border: 1px solid $green;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $green;
       }
     }
   }
