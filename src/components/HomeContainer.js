@@ -18,7 +18,7 @@ const HomeContainer = ({
   //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
   let request = "";
   request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`;
-  //https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`
+  // request = `https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`;
 
   //REQUEST AXIOS//
   useEffect(() => {

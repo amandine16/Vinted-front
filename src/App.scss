@@ -33,7 +33,7 @@ button:hover {
 // HEADER //
 .Header {
   // FILTERS //
-
+  min-height: 10vh;
   .topHeader {
     display: flex;
     align-items: center;
@@ -250,27 +250,74 @@ button:hover {
 // ONE OFFER //
 .Offer {
   background-color: #eaedee;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
   .offerContent {
     max-width: 1280px;
-    margin: 0 auto;
+    margin: auto;
     display: flex;
-    justify-content: space-around;
-    padding: 30px;
+    justify-content: space-evenly;
+    // padding: 40px;
+    align-items: center;
+  }
+  .left {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    align-items: center;
     .offer-picture {
+      display: flex;
+      justify-content: center;
       img {
-        height: 600px;
+        max-height: 400px;
         width: auto;
         object-fit: cover;
       }
     }
+    .carrou {
+      width: 60%;
+    }
+    .carroussel-offer {
+      height: 100%;
+      width: 100%;
+      margin-top: 15px;
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      ul {
+        overflow-x: scroll;
+        display: flex;
+        scroll-behavior: smooth;
+        li:not(:nth-child(3n)) {
+          margin-right: 10px;
+        }
+        li {
+          width: calc(100% / 3 - (10px / 3));
+          flex-shrink: 0;
+          height: 180px;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .rigth {
+    width: 40%;
+
     .offer-infos {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       background-color: #fff;
-      width: 400px;
+      width: 100%;
       border-radius: 5px;
       padding: 40px;
+      height: 100%;
       .infos-offer {
         .price-offer {
           font-size: 24px;
@@ -283,12 +330,13 @@ button:hover {
           margin: 20px 0;
           li {
             display: flex;
-            padding: 2px 0;
-            span:nth-child(odd) {
+            padding: 8px 0;
+            div:nth-child(odd) {
               color: #999;
               font-weight: 100;
+              width: 300px;
             }
-            span {
+            div {
               flex: 1;
               font-size: 14px;
               font-weight: 700;
@@ -298,6 +346,11 @@ button:hover {
         }
       }
       .description-offer {
+        margin-bottom: 25px;
+        p {
+          margin: 5px 0;
+          text-align: justify;
+        }
         .name-product {
           font-weight: 700;
         }
@@ -356,6 +409,7 @@ button:hover {
         font-size: 24px;
       }
       svg {
+        cursor: pointer;
         color: $text-grey;
         width: 20px;
         height: 20px;
@@ -411,6 +465,7 @@ button:hover {
 }
 .separator {
   display: block;
+  margin: 25px 0;
   width: 100%;
   height: 1px;
   background: rgba(17, 17, 17, 0.1);

@@ -21,9 +21,9 @@ const Header = ({
     setFilters(newFilters);
   };
 
+  // FUNCTION FOR MODAL
   const [modalSignUp, setModalSignUp] = useState(false);
   const [modalLogin, setModalLogin] = useState(false);
-  // FUNCTION FOR MODAL
   const handleClik = (typeModal) => {
     if (typeModal === "signUp") {
       modalSignUp ? setModalSignUp(false) : setModalSignUp(true);
@@ -31,6 +31,8 @@ const Header = ({
       modalLogin ? setModalLogin(false) : setModalLogin(true);
     }
   };
+
+  // RETURN //
   return (
     <div className="Header">
       <div className="topHeader">

@@ -53,17 +53,11 @@ function App() {
         setErrorMessage={setErrorMessage}
         errorMessage={errorMessage}
       />
+
       <Switch>
         <Route path="/offer/:id" component={Offer}>
           {/* <Offer /> */}
         </Route>
-        {/* <Route path="/user/login/">
-          <Login
-            setUser={setUser}
-            setErrorMessage={setErrorMessage}
-            errorMessage={errorMessage}
-          />
-        </Route> */}
         <Route path="/">
           <Home
             filters={filters}
