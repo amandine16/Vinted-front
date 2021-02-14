@@ -14,8 +14,8 @@ const Offer = () => {
     const fetchArticle = async () => {
       try {
         const response = await axios.get(
-          `https://vinted-projet-backend.herokuapp.com/offer/${id}`
-          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          // `https://vinted-projet-backend.herokuapp.com/offer/${id}`
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
         );
         setArticle(response.data);
         setIsLoading(false);
@@ -30,11 +30,17 @@ const Offer = () => {
     <span>En chargement ...</span>
   ) : (
     <>
+      {console.log(article.product_pictures.length)}
       <div className="Offer">
         <div className="offerContent">
           <div className="left">
             {/* PICTURE */}
-            <div className="offer-picture">
+            <div
+              className="offer-picture"
+              style={{
+                height: article.product_pictures.length <= 1 && "500px",
+              }}
+            >
               {article.product_image && (
                 <img src={article.product_image.secure_url} alt="" />
               )}

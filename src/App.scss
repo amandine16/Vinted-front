@@ -255,7 +255,7 @@ button:hover {
   align-items: center;
   .offerContent {
     max-width: 1280px;
-    margin: auto;
+    margin: 25px auto;
     display: flex;
     justify-content: space-evenly;
     // padding: 40px;
@@ -270,8 +270,10 @@ button:hover {
     .offer-picture {
       display: flex;
       justify-content: center;
+      max-height: 500px;
       img {
-        max-height: 400px;
+        // max-height: 400px;
+        height: 100%;
         width: auto;
         object-fit: cover;
       }
