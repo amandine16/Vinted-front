@@ -21,8 +21,8 @@ const SignUp = ({
     const infoUserInscris = async () => {
       try {
         const response = await axios.post(
-          // "https://vinted-projet-backend.herokuapp.com/user/signup",
-          "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+          "https://vinted-projet-backend.herokuapp.com/user/signup",
+          // "https://lereacteur-vinted-api.herokuapp.com/user/signup",
           // "http://localhost:3001/user/signup",
           {
             email: email,

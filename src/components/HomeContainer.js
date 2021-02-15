@@ -32,8 +32,8 @@ const HomeContainer = ({
 
   //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
   let request = "";
-  // request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
-  request = `https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
+  request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
+  // request = `https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
   // request = `http://localhost:3001/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
 
   //REQUEST AXIOS//
