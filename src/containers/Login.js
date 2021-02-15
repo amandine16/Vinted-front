@@ -55,9 +55,9 @@ const Login = ({
   };
 
   return (
-    <div className="ModalConnexion">
-      <div className="form">
-        <div>
+    <div className="Modal">
+      <div className="modal-content">
+        <div className="header-modal">
           <span>Se connecter</span>
           <FontAwesomeIcon
             icon="times-circle"

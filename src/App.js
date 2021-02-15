@@ -22,6 +22,10 @@ function App() {
     Cookies.get("CookieUserToken") || null
   );
 
+  // STATE FOR MODAL
+  const [modalSignUp, setModalSignUp] = useState(false);
+  const [modalLogin, setModalLogin] = useState(false);
+
   // State pour afficher message quand aucun article trouvé
   const [messageNotFoundArticles, setMessageNotFoundArticles] = useState("");
 
@@ -59,6 +63,10 @@ function App() {
         filters={filters}
         setErrorMessage={setErrorMessage}
         errorMessage={errorMessage}
+        setModalLogin={setModalLogin}
+        setModalSignUp={setModalSignUp}
+        modalSignUp={modalSignUp}
+        modalLogin={modalLogin}
       />
 
       <Switch>
@@ -66,7 +74,11 @@ function App() {
           {/* <Offer /> */}
         </Route>
         <Route path="/publish">
-          <Publish />
+          <Publish
+            userToken={userToken}
+            setModalLogin={setModalLogin}
+            modalLogin={modalLogin}
+          />
         </Route>
         <Route path="/">
           <Home

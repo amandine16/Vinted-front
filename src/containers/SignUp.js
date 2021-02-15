@@ -74,9 +74,9 @@ const SignUp = ({
 
   //FORM//
   return (
-    <div className="ModalConnexion">
-      <div className="form">
-        <div>
+    <div className="Modal">
+      <div className="modal-content">
+        <div className="header-modal">
           <span>S'inscrire</span>
           <FontAwesomeIcon
             icon="times-circle"

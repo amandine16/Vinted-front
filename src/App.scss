@@ -3,6 +3,7 @@ $green: #2baeb7;
 $text-grey: #999;
 $pink: #fcced3;
 $fond: #ebedee;
+$red: #c2175b;
 
 // GENERAL //
 a {
@@ -22,6 +23,21 @@ button {
   border: none;
   outline: none;
   border-radius: 5px;
+}
+.btn {
+  min-height: 30px;
+  min-width: 115px;
+  font-size: 12px;
+  color: white;
+}
+.btn-green {
+  background: $green;
+
+  &:hover {
+    background: #2699a1;
+    transition: 0.3s;
+    color: white;
+  }
 }
 .separator {
   display: block;
@@ -112,47 +128,12 @@ button {
       }
     }
 
-    // button {
-    //   cursor: pointer;
-    //   background-color: $green;
-    //   border: none;
-    //   outline: none;
-    //   border-radius: 5px;
-    //   color: white;
-    // }
-    // button:hover {
-    //   background: #2699a1 ;
-    //   transition: 0.3s;
-    //   color: white ;
-    // }
-    .btn-signup-header,
-    .btn-login-header,
-    .btn-buy-header {
-      height: 30px;
-      width: 115px;
-
-      font-size: 12px;
-      cursor: pointer;
-      background-color: $green;
-
-      color: white;
-      &:hover {
-        background: #2699a1;
-        transition: 0.3s;
-        color: white;
-      }
-    }
-
     .btn-signup-header {
       margin-right: 20px;
     }
 
     .btn-deconnexion {
-      height: 30px;
-      width: 115px;
       background: #c2175b;
-      font-size: 12px;
-      color: white;
       &:hover {
         background: #aa1450;
       }
@@ -506,7 +487,7 @@ button {
 }
 
 // SIGNUP //
-.ModalConnexion {
+.Modal {
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -524,8 +505,8 @@ button {
     margin-top: 15px;
     padding: 5px 15px;
   }
-  .form {
-    > div {
+  .modal-content {
+    .header-modal {
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
@@ -585,6 +566,13 @@ button {
         margin-left: 20px;
       }
     }
+    .choice-btn {
+      display: flex;
+      justify-content: space-between;
+      button:nth-child(2) {
+        margin-left: 15px;
+      }
+    }
   }
 }
 .Publish {
@@ -609,6 +597,21 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        .previewImg {
+          position: relative;
+          height: 100%;
+          img {
+            height: 100%;
+          }
+          svg {
+            position: absolute;
+            top: 6px;
+            z-index: 1;
+            right: 6px;
+            color: $red;
+          }
+        }
+
         .input-file {
           display: flex;
           align-items: center;

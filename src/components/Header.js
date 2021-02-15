@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import logoVinted from "../assets/img/logo-vinted.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import SignUp from "../containers/SignUp";
 import Login from "../containers/Login";
 import { useHistory } from "react-router-dom";
@@ -13,6 +12,10 @@ const Header = ({
   setFilters,
   errorMessage,
   setErrorMessage,
+  modalLogin,
+  modalSignUp,
+  setModalLogin,
+  setModalSignUp,
 }) => {
   const history = useHistory();
 
@@ -24,9 +27,6 @@ const Header = ({
     setFilters(newFilters);
   };
 
-  // FUNCTION FOR MODAL
-  const [modalSignUp, setModalSignUp] = useState(false);
-  const [modalLogin, setModalLogin] = useState(false);
   const handleClik = (typeModal) => {
     if (typeModal === "signUp") {
       modalSignUp ? setModalSignUp(false) : setModalSignUp(true);
@@ -57,20 +57,23 @@ const Header = ({
         <div className="connexion-container">
           {/* IF TOKEN EXIST => BTN DECONNEXION*/}
           {userToken ? (
-            <button className="btn-deconnexion" onClick={() => setUser(null)}>
+            <button
+              className="btn btn-deconnexion"
+              onClick={() => setUser(null)}
+            >
               Deconnexion
             </button>
           ) : (
             <>
               <button
-                className="btn-signup-header"
+                className="btn btn-green btn-signup-header"
                 onClick={() => handleClik("signUp")}
               >
                 S'inscrire
               </button>
 
               <button
-                className="btn-login-header"
+                className="btn btn-green btn-login-header"
                 onClick={() => handleClik("login")}
               >
                 Se connecter
@@ -79,9 +82,9 @@ const Header = ({
           )}
         </div>
         {/*  BUTTON BUY ARTICLE */}
-        <div className="btn-buy">
+        <div className="btn btn-buy">
           <button
-            className="btn-buy-header"
+            className="btn btn-green btn-buy-header"
             onClick={() => {
               userToken ? history.push("/publish") : setModalLogin(true);
             }}
