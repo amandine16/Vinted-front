@@ -8,8 +8,13 @@ import Header from "./components/Header";
 import { useState } from "react";
 // FontAwesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-library.add(faSearch, faTimesCircle);
+import {
+  faSearch,
+  faTimesCircle,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import Publish from "./containers/Publish";
+library.add(faSearch, faTimesCircle, faPlus);
 
 function App() {
   // TOKEN IR FOR USE DIFFERENT PAGE
@@ -59,6 +64,9 @@ function App() {
       <Switch>
         <Route path="/offer/:id" component={Offer}>
           {/* <Offer /> */}
+        </Route>
+        <Route path="/publish">
+          <Publish />
         </Route>
         <Route path="/">
           <Home

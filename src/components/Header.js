@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import SignUp from "../containers/SignUp";
 import Login from "../containers/Login";
+import { useHistory } from "react-router-dom";
 
 const Header = ({
   userToken,
@@ -13,6 +14,8 @@ const Header = ({
   errorMessage,
   setErrorMessage,
 }) => {
+  const history = useHistory();
+
   // FUNCTION FOR FILTERS
   const handleChange = (e) => {
     const newFilters = { ...filters };
@@ -75,8 +78,16 @@ const Header = ({
             </>
           )}
         </div>
+        {/*  BUTTON BUY ARTICLE */}
         <div className="btn-buy">
-          <button className="btn-buy-header">Vends tes articles</button>
+          <button
+            className="btn-buy-header"
+            onClick={() => {
+              userToken ? history.push("/publish") : setModalLogin(true);
+            }}
+          >
+            Vends tes articles
+          </button>
         </div>
       </div>
       {/* MODAL */}
@@ -86,6 +97,7 @@ const Header = ({
           setErrorMessage={setErrorMessage}
           errorMessage={errorMessage}
           setModalSignUp={setModalSignUp}
+          setModalLogin={setModalLogin}
         />
       )}
       {modalLogin && (
@@ -94,6 +106,7 @@ const Header = ({
           setErrorMessage={setErrorMessage}
           errorMessage={errorMessage}
           setModalLogin={setModalLogin}
+          setModalSignUp={setModalSignUp}
         />
       )}
     </div>

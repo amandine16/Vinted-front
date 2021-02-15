@@ -1,24 +1,29 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
+const SignUp = ({
+  setUser,
+  setErrorMessage,
+  errorMessage,
+  setModalSignUp,
+  setModalLogin,
+}) => {
   //STATE//
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [check, setCheck] = useState(false);
-  const history = useHistory();
-
+  setErrorMessage("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const infoUserInscris = async () => {
       try {
         const response = await axios.post(
-          // "https://lereacteur-vinted-api.herokuapp.com/user/signup",
           "https://vinted-projet-backend.herokuapp.com/user/signup",
+          // "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+          // "http://localhost:3001/user/signup",
           {
             email: email,
             username: username,
@@ -29,8 +34,10 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
         if (response.data.token) {
           // Une fois l'inscription réalisée, l'utilisateur est directement connecté et redirigé vers la homepage
           setUser(response.data.token);
-          history.push("/");
+          setModalSignUp(false);
+          setErrorMessage("");
         }
+        console.log(response.data);
       } catch (error) {
         console.log(error.message);
         setErrorMessage("Something went wrong, please try again");
@@ -46,18 +53,23 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
   //FUNCTION FOR INPUT FORM//
   const handleUserName = (e) => {
     setUsername(e.target.value);
+    setErrorMessage("");
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
+    setErrorMessage("");
   };
   const handlePassword = (e) => {
     setPassword(e.target.value);
+    setErrorMessage("");
   };
   const handlePhone = (e) => {
     setPhone(e.target.value);
+    setErrorMessage("");
   };
   const handleCheck = (e) => {
     setCheck(e.target.checked);
+    setErrorMessage("");
   };
 
   //FORM//
@@ -68,7 +80,10 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
           <span>S'inscrire</span>
           <FontAwesomeIcon
             icon="times-circle"
-            onClick={() => setModalSignUp(false)}
+            onClick={() => {
+              setModalSignUp(false);
+              setErrorMessage("");
+            }}
           />
         </div>
 
@@ -117,6 +132,15 @@ const SignUp = ({ setUser, setErrorMessage, errorMessage, setModalSignUp }) => {
           {/* btn-inscription */}
           <button type="submit">S'inscrire</button>
           <span style={{ color: "red" }}>{errorMessage}</span>
+          {/* LINK TO SIGNUP */}
+          <button
+            onClick={() => {
+              setModalLogin(true);
+              setModalSignUp(false);
+            }}
+          >
+            Déjà un compte ?
+          </button>
         </form>
       </div>
     </div>

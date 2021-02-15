@@ -32,8 +32,9 @@ const HomeContainer = ({
 
   //TEST CHECK ORDER PRICE FOR AXIOS REQUEST//
   let request = "";
-  // request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}`;
-  request = `https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
+  request = `https://vinted-projet-backend.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
+  // request = `https://lereacteur-vinted-api.herokuapp.com/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
+  // request = `http://localhost:3001/offers/?sort=${filters.checkOrder}&priceMin=${filters.priceMin}&priceMax=${filters.priceMax}&title=${filters.search}&page=${filters.page}&limit=${filters.limit}`;
 
   //REQUEST AXIOS//
   useEffect(() => {
@@ -41,7 +42,6 @@ const HomeContainer = ({
       try {
         const response = await axios.get(request);
         setInfosArticles(response.data);
-        console.log(response.data);
         setIsLoading(false);
         if (Object.keys(response.data.offers).length === 0) {
           setMessageNotFoundArticles(
@@ -92,7 +92,7 @@ const HomeContainer = ({
         {/* ARTICLES */}
         {infosArticles.offers.map((info, index) => {
           return (
-            <div className="card-article" id={info._id} key={index}>
+            <div className="card-article" id={info._id} key={info._id}>
               <div className="owner">
                 {info.owner.account.avatar ? (
                   <img
@@ -105,7 +105,7 @@ const HomeContainer = ({
 
                 <span>{info.owner.account.username}</span>
               </div>
-              <Link to={`/offer/${info._id}`} key={index}>
+              <Link to={`/offer/${info._id}`} key={info._id}>
                 <div className="product-picture-infos">
                   <img src={info.product_image.secure_url} alt="" />
                   <div className="product_size-brand-price">
