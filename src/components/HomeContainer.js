@@ -76,11 +76,12 @@ const HomeContainer = ({
         <select id="selectNbResult" onChange={selectNbResults}>
           <option value="1">1</option>
           <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="4">4</option>
           <option value="5" selected>
             5
           </option>
           <option value="10">10</option>
+          <option value={infosArticles.count}>Tout</option>
         </select>
       </div>
       <div className="homeOffers">

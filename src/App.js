@@ -33,10 +33,10 @@ function App() {
   const [filters, setFilters] = useState({
     checkOrder: "price-asc",
     priceMin: 0,
-    priceMax: 100,
+    priceMax: 500,
     search: "",
     page: 1,
-    limit: 5,
+    limit: 10,
   });
 
   // State de msg d'erreur pour login + signup
