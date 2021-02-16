@@ -18,15 +18,16 @@ import {
 library.add(faSearch, faTimesCircle, faPlus);
 
 function App() {
-  // TOKEN IR FOR USE DIFFERENT PAGE
+  // STATE FOR COOKIE
   const [userToken, setUserToken] = useState(
     Cookies.get("CookieUserToken") || null
   );
-
+  const [userID, setUserId] = useState(Cookies.get("CookieUserId") || null);
   // STATE FOR MODAL
   const [modalSignUp, setModalSignUp] = useState(false);
   const [modalLogin, setModalLogin] = useState(false);
-
+  // fromModal permet de rediriger le user, une fois la connexion réalisée, en fonction de la page dont il provient
+  const [fromModal, setFromModal] = useState({ from: "", infoOffer: "" });
   // State pour afficher message quand aucun article trouvé
   const [messageNotFoundArticles, setMessageNotFoundArticles] = useState("");
 
@@ -43,16 +44,21 @@ function App() {
   // State de msg d'erreur pour login + signup
   const [errorMessage, setErrorMessage] = useState("");
 
-  const setUser = (token) => {
-    if (token) {
+  const setUser = (token, id) => {
+    if ((token, id)) {
       // Je crée le Cookie
       Cookies.set("CookieUserToken", token, { expires: 7 });
+      Cookies.set("CookieUserId", id, { expires: 7 });
+
       // je mets à jour le state token, pour etre dispo dans les autres pages
       setUserToken(token);
+      setUserId(id);
     } else {
       // Je supprime le cookie quand l'utilisateur se deconnecte
       Cookies.remove("CookieUserToken");
+      Cookies.remove("CookieUserId");
       setUserToken(null);
+      setUserId(null);
     }
   };
   return (
@@ -68,11 +74,17 @@ function App() {
         setModalSignUp={setModalSignUp}
         modalSignUp={modalSignUp}
         modalLogin={modalLogin}
+        fromModal={fromModal}
+        setFromModal={setFromModal}
       />
 
       <Switch>
-        <Route path="/offer/:id" component={Offer}>
-          {/* <Offer /> */}
+        <Route path="/offer/:id">
+          <Offer
+            setModalLogin={setModalLogin}
+            fromModal={fromModal}
+            setFromModal={setFromModal}
+          />
         </Route>
         <Route path="/publish">
           <Publish
@@ -90,6 +102,7 @@ function App() {
             messageNotFoundArticles={messageNotFoundArticles}
             setMessageNotFoundArticles={setMessageNotFoundArticles}
             setFilters={setFilters}
+            setModalLogin={setModalLogin}
           />
         </Route>
       </Switch>

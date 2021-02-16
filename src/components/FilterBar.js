@@ -6,7 +6,7 @@ const MIN = 0;
 const MAX = 500;
 
 const FilterBar = ({ rtl, filters, setFilters }) => {
-  const [values, setValues] = useState([1, 100]);
+  const [values, setValues] = useState([1, 500]);
   return (
     <div
       style={{

@@ -16,6 +16,9 @@ const Header = ({
   modalSignUp,
   setModalLogin,
   setModalSignUp,
+
+  fromModal,
+  setFromModal,
 }) => {
   const history = useHistory();
 
@@ -81,7 +84,7 @@ const Header = ({
             </>
           )}
         </div>
-        {/*  BUTTON BUY ARTICLE */}
+        {/*  BUTTON SELL ARTICLE */}
         <div className="btn btn-buy">
           <button
             className="btn btn-green btn-buy-header"
@@ -110,6 +113,8 @@ const Header = ({
           errorMessage={errorMessage}
           setModalLogin={setModalLogin}
           setModalSignUp={setModalSignUp}
+          fromModal={fromModal}
+          setFromModal={setFromModal}
         />
       )}
     </div>

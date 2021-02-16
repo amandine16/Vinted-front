@@ -7,6 +7,7 @@ const Home = ({
   messageNotFoundArticles,
   setMessageNotFoundArticles,
   setFilters,
+  setModalLogin,
 }) => {
   return (
     <>
@@ -14,7 +15,7 @@ const Home = ({
       <SearchHeader filters={filters} setFilters={setFilters} />
       <div className="Home">
         {/* bandeau hero sous header */}
-        <HeaderHero />
+        <HeaderHero setModalLogin={setModalLogin} />
         {/* les articles en vente */}
         <HomeContainer
           filters={filters}

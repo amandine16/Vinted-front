@@ -1,13 +1,37 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserEmptySvg from "../components/user-empty-state";
+import Cookies from "js-cookie";
 
-const Offer = () => {
-  const [article, setArticle] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+const Offer = ({ setModalLogin, fromModal, setFromModal }) => {
+  const history = useHistory();
+  // ID USER
+  const idUser = Cookies.get("CookieUserId");
+  // TOKEN USER
+  const tokenUser = Cookies.get("CookieUserToken");
+  // ID OFFER
   const { id } = useParams();
+  // ALL INFOS ARTICLE (id include)
+  const [article, setArticle] = useState();
+  // IS LOADING
+  const [isLoading, setIsLoading] = useState(true);
   const keyDetails = [];
+
+  const handleBuy = () => {
+    if (tokenUser && idUser) {
+      history.push("/payment", { article });
+    } else {
+      // OPEN MODAL LOGIN
+      setModalLogin(true);
+      // SEND ALL INFO OFFER pour être redirigé ensuite, une fois connecté, vers ma page d'offre
+      const newFromModal = { ...fromModal };
+      newFromModal.from = "offer";
+      newFromModal.infoOffer = article;
+      setFromModal(newFromModal);
+    }
+  };
 
   // REQUEST AXIOS //
   useEffect(() => {
@@ -17,8 +41,10 @@ const Offer = () => {
           `https://vinted-projet-backend.herokuapp.com/offer/${id}`
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
         );
-        setArticle(response.data);
-        setIsLoading(false);
+        if (response.data) {
+          setArticle(response.data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error.message);
       }
@@ -30,7 +56,6 @@ const Offer = () => {
     <span>En chargement ...</span>
   ) : (
     <>
-      {console.log(article.product_pictures.length)}
       <div className="Offer">
         <div className="offerContent">
           <div className="left">
@@ -115,7 +140,9 @@ const Offer = () => {
                 </div>
               </div>
               {/* BTN TO BUY */}
-              <button className="btn btn-green btn-buy">Acheter</button>
+              <button className="btn btn-green btn-buy" onClick={handleBuy}>
+                Acheter
+              </button>
             </div>
           </div>
         </div>

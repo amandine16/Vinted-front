@@ -9,6 +9,8 @@ const Login = ({
   errorMessage,
   setModalLogin,
   setModalSignUp,
+  fromModal,
+  setFromModal,
 }) => {
   // State pour le form
   const [email, setEmail] = useState("");
@@ -27,12 +29,23 @@ const Login = ({
           }
         );
         if (response.data.token) {
-          // J'envoie le token à la fonction qui crée le cookies
-          setUser(response.data.token);
+          // J'envoie le token à la fonction qui crée le cookies + l'id pour le stocker aussi dans un cookie
+          setUser(response.data.token, response.data._id);
           // Une fois la connexion réalisée, je ferme la modal
           setModalLogin(false);
+          // Message d'erreur mise à vide
           setErrorMessage("");
-          history.push("/publish");
+          // si la modale proviens de la page offer, je redirige directement vers le paiement de l'article
+          if (fromModal.from === "offer") {
+            const article = fromModal.infoOffer;
+            history.push("/payment", { article });
+            const newFrom = { ...fromModal };
+            newFrom.from = "";
+            newFrom.infoOffer = "";
+            setFromModal(newFrom);
+          } else {
+            history.push("/publish");
+          }
         }
       } catch (error) {
         console.log(error.message);

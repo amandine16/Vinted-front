@@ -269,9 +269,8 @@ const Publish = ({ userToken, setModalLogin }) => {
     </div>
   ) : (
     <>
-      {/* Si l'utilisateur se déconnecte en étant sur la page publish, il est directement redirigé sur la page d'accueil, avec la modale login ouverte */}
+      {/* Si l'utilisateur se déconnecte en étant sur la page publish, il est directement redirigé sur la page d'accueil */}
       {history.push("/")}
-      {setModalLogin(true)}
     </>
   );
 };

@@ -33,7 +33,7 @@ const SignUp = ({
         );
         if (response.data.token) {
           // Une fois l'inscription réalisée, l'utilisateur est directement connecté et redirigé vers la homepage
-          setUser(response.data.token);
+          setUser(response.data.token, response.data._id);
           setModalSignUp(false);
           setErrorMessage("");
         }
