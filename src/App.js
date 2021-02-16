@@ -6,14 +6,15 @@ import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 import Header from "./components/Header";
 import { useState } from "react";
-// FontAwesome
+import Publish from "./containers/Publish";
+import Payment from "./containers/Payment";
+// FONTAWESOME
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
   faTimesCircle,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Publish from "./containers/Publish";
 library.add(faSearch, faTimesCircle, faPlus);
 
 function App() {
@@ -79,6 +80,9 @@ function App() {
             setModalLogin={setModalLogin}
             modalLogin={modalLogin}
           />
+        </Route>
+        <Route path="/payment">
+          <Payment />
         </Route>
         <Route path="/">
           <Home

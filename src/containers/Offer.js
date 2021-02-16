@@ -46,7 +46,6 @@ const Offer = () => {
               )}
             </div>
             {/* Carroussel */}
-
             {article.product_pictures.length >= 2 && (
               <div className="carrou">
                 <div className="carroussel-offer">
@@ -116,7 +115,7 @@ const Offer = () => {
                 </div>
               </div>
               {/* BTN TO BUY */}
-              <button className="btn-buy">Acheter</button>
+              <button className="btn btn-green btn-buy">Acheter</button>
             </div>
           </div>
         </div>

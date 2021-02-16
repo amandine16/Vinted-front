@@ -133,6 +133,7 @@ const Publish = ({ userToken, setModalLogin }) => {
                     <FontAwesomeIcon icon="plus" /> Ajoute une photo
                   </label>
                   <input
+                    accept="image/*"
                     id="file"
                     type="file"
                     onChange={(e) => {
