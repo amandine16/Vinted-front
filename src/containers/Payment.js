@@ -12,6 +12,7 @@ const stripePromise = loadStripe(
 const Payment = () => {
   const history = useHistory();
   const tokenUser = Cookies.get("CookieUserToken");
+
   const location = useLocation();
   const { article } = location.state;
 

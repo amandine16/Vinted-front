@@ -1,16 +1,17 @@
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const CheckoutForm = ({ article }) => {
+  const idUser = Cookies.get("CookieUserId");
+
   const stripe = useStripe();
   const elements = useElements();
   const [succeeded, setSucceeded] = useState(false);
-  const [insurance, setInsurance] = useState(0.3);
-  const [delivery, setDelivery] = useState(1.99);
-  const [total, setTotal] = useState(
-    (succeeded + insurance + delivery).toFixed(2)
-  );
+  const insurance = 0.3;
+  const delivery = 1.99;
+  const total = (succeeded + insurance + delivery).toFixed(2);
   const keyDetails = [];
 
   const handleSubmit = async (e) => {
@@ -20,19 +21,24 @@ const CheckoutForm = ({ article }) => {
       const cardElements = elements.getElement(CardElement);
       // Etape 2 : Envoyer les données à l'API Stripe pour récupérer le token
       const stripeResponse = await stripe.createToken(cardElements, {
-        name: "",
+        name: idUser,
       });
-      const stripeToken = stripeResponse.token.id;
-      // Etape 3 : Faire la requête vers mon serveur pour effectuer la transaction, avec le token récupéré côté client
-      const response = await axios.post(
-        "https://vinted-projet-backend.herokuapp.com/payment",
-        {
-          stripeToken,
+
+      if (stripeResponse) {
+        const stripeToken = stripeResponse.token.id;
+        console.log(stripeToken);
+        // Etape 3 : Faire la requête vers mon serveur pour effectuer la transaction, avec le token récupéré côté client
+        const response = await axios.post(
+          "https://vinted-projet-backend.herokuapp.com/payment",
+          // "http://localhost:3001/payment",
+          {
+            stripeToken,
+          }
+        );
+        console.log(response.status);
+        if (response.status === 200) {
+          setSucceeded(true);
         }
-      );
-      console.log(response.status);
-      if (response.status === 200) {
-        setSucceeded(true);
       }
     } catch (error) {
       console.log(error.message);

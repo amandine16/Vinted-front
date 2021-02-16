@@ -73,13 +73,11 @@ const HomeContainer = ({
       <div className="NbArticleSelected">
         <label htmlFor="selectNbResult">Nombre de résultats à afficher :</label>
 
-        <select id="selectNbResult" onChange={selectNbResults}>
+        <select id="selectNbResult" defaultValue="5" onChange={selectNbResults}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="4">4</option>
-          <option value="5" selected>
-            5
-          </option>
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value={infosArticles.count}>Tout</option>
         </select>
@@ -129,21 +127,20 @@ const HomeContainer = ({
           {/* Numéro des pages disponibles */}
           {tabPage.map((numeroDePage, i) => {
             return (
-              <>
-                <li
-                  style={{
-                    color: i + 1 === filters.page && "white",
-                    backgroundColor: i + 1 === filters.page && "#29ADB6",
-                  }}
-                  onClick={() => {
-                    let newPage = { ...filters };
-                    newPage.page = i + 1;
-                    setFilters(newPage);
-                  }}
-                >
-                  {numeroDePage}
-                </li>
-              </>
+              <li
+                key={i}
+                style={{
+                  color: i + 1 === filters.page && "white",
+                  backgroundColor: i + 1 === filters.page && "#29ADB6",
+                }}
+                onClick={() => {
+                  let newPage = { ...filters };
+                  newPage.page = i + 1;
+                  setFilters(newPage);
+                }}
+              >
+                {numeroDePage}
+              </li>
             );
           })}
         </ul>

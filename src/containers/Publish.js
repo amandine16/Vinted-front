@@ -81,6 +81,7 @@ const Publish = ({ userToken, setModalLogin }) => {
     formData.append("city", publish.city);
     formData.append("price", publish.price);
     formData.append("picture", publish.picture);
+
     // REQUEST AXIOS
     try {
       const response = await axios.post(
@@ -94,10 +95,8 @@ const Publish = ({ userToken, setModalLogin }) => {
         }
       );
 
-      if (response.data._id) {
-        setIdPublish(response.data._id);
-        idPublish && setModalPublish(true);
-      }
+      setIdPublish(response.data._id);
+      setModalPublish(true);
     } catch (error) {
       console.log(error.message);
     }
@@ -127,7 +126,7 @@ const Publish = ({ userToken, setModalLogin }) => {
                   />
                 </div>
               ) : (
-                // UPLOAD IMG
+                // // UPLOAD IMG
                 <div className="input-file">
                   <label htmlFor="file">
                     <FontAwesomeIcon icon="plus" /> Ajoute une photo
@@ -145,6 +144,7 @@ const Publish = ({ userToken, setModalLogin }) => {
               )}
             </div>
           </div>
+
           <div className="box-publish">
             {/* TITLE */}
             <div className="text-input-publish">
@@ -247,8 +247,10 @@ const Publish = ({ userToken, setModalLogin }) => {
                 placeholder="0,00 €"
               />
             </div>
-            <input type="checkbox" />
-            <span>Je suis intéressé(e) par les échanges</span>
+            <div className="echange">
+              <input type="checkbox" />
+              <span>Je suis intéressé(e) par les échanges</span>
+            </div>
           </div>
           {/* BTN SUBMIT */}
           <button className="btn btn-green" type="submit">

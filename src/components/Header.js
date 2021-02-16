@@ -85,7 +85,7 @@ const Header = ({
           )}
         </div>
         {/*  BUTTON SELL ARTICLE */}
-        <div className="btn btn-buy">
+        <div className="btn btn-buy btn-header">
           <button
             className="btn btn-green btn-buy-header"
             onClick={() => {

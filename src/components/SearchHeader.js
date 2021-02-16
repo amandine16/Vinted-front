@@ -3,6 +3,7 @@ import FilterBar from "./FilterBar";
 const SearchHeader = ({ filters, setFilters }) => {
   return (
     <div className="search-container">
+      <div className="col1"></div>
       <div className="filters-price">
         {/* CHECKBOX ORDER-PRICE */}
         <div className="checkbox-orderPrice-container">
@@ -43,6 +44,7 @@ const SearchHeader = ({ filters, setFilters }) => {
           </span>
         </div>
       </div>
+      <div className="col3"></div>
     </div>
   );
 };
