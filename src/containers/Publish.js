@@ -112,6 +112,7 @@ const Publish = ({ userToken, setModalLogin }) => {
           {/* PICTURE */}
           <div className="file">
             <div className="dashed">
+              {/* PREVIEW IMG */}
               {previewImg ? (
                 <div className="previewImg">
                   <img src={previewImg} alt="preview" />
@@ -126,6 +127,7 @@ const Publish = ({ userToken, setModalLogin }) => {
                   />
                 </div>
               ) : (
+                // UPLOAD IMG
                 <div className="input-file">
                   <label htmlFor="file">
                     <FontAwesomeIcon icon="plus" /> Ajoute une photo
