@@ -23,6 +23,7 @@ function App() {
     Cookies.get("CookieUserToken") || null
   );
   const [userId, setUserId] = useState(Cookies.get("CookieUserId") || null);
+  console.log(userId);
   // STATE FOR MODAL
   const [modalSignUp, setModalSignUp] = useState(false);
   const [modalLogin, setModalLogin] = useState(false);

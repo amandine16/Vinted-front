@@ -44,7 +44,8 @@ const Login = ({
             newFrom.infoOffer = "";
             setFromModal(newFrom);
           } else {
-            history.push("/publish");
+            // Sinon je redirige vers la page home (pour le moment)
+            history.push("/");
           }
         }
       } catch (error) {
