@@ -89,7 +89,15 @@ const Header = ({
           <button
             className="btn btn-green btn-buy-header"
             onClick={() => {
-              userToken ? history.push("/publish") : setModalLogin(true);
+              userToken
+                ? history.push("/publish")
+                : // OPEN MODAL LOGIN
+                  setModalLogin(true);
+              // SEND ALL INFO OFFER pour être redirigé ensuite, une fois connecté, vers ma page d'offre
+              const newFromModal = { ...fromModal };
+              newFromModal.from = "vendre";
+              newFromModal.infoOffer = "";
+              setFromModal(newFromModal);
             }}
           >
             Vends tes articles

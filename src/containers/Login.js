@@ -37,14 +37,27 @@ const Login = ({
           setErrorMessage("");
           // si la modale proviens de la page offer, je redirige directement vers le paiement de l'article
           if (fromModal.from === "offer") {
+            //Si je viens de la page offer
+            // 1. Je récupère les infos sur l'article
             const article = fromModal.infoOffer;
+            // 2.Je redirige vers la page payment avec toutes les infos, pour qu'elles soient exploitées là-bas
             history.push("/payment", { article });
+            // 3.Je vide mon state
+            const newFrom = { ...fromModal };
+            newFrom.from = "";
+            newFrom.infoOffer = "";
+            setFromModal(newFrom);
+          } else if (fromModal.from === "vendre") {
+            // Si je du bouton "Vendre tes articles"
+            // 1. je redirige vers la page de vente
+            history.push("/publish");
+            // 3.Je vide mon state
             const newFrom = { ...fromModal };
             newFrom.from = "";
             newFrom.infoOffer = "";
             setFromModal(newFrom);
           } else {
-            // Sinon je redirige vers la page home (pour le moment)
+            // Sinon je redirige simplement vers la page home
             history.push("/");
           }
         }
