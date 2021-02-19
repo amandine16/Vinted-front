@@ -4,6 +4,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 const CheckoutForm = ({ article }) => {
+  // Rcupérer l'id du user pour le relier au paiement
   const idUser = Cookies.get("CookieUserId");
 
   const stripe = useStripe();
@@ -23,23 +24,26 @@ const CheckoutForm = ({ article }) => {
       const stripeResponse = await stripe.createToken(cardElements, {
         name: idUser,
       });
+      console.log(`id user : ${idUser}`);
 
-      if (stripeResponse) {
-        const stripeToken = stripeResponse.token.id;
-        console.log(stripeToken);
-        // Etape 3 : Faire la requête vers mon serveur pour effectuer la transaction, avec le token récupéré côté client
-        const response = await axios.post(
-          "https://vinted-projet-backend.herokuapp.com/payment",
-          // "http://localhost:3001/payment",
-          {
-            stripeToken,
-          }
-        );
-        console.log(response.status);
-        if (response.status === 200) {
-          setSucceeded(true);
+      // if (stripeResponse) {
+      const stripeToken = stripeResponse.token.id;
+      console.log(`stripeToken : ${stripeToken}`);
+      // Etape 3 : Faire la requête vers mon serveur pour effectuer la transaction, avec le token récupéré côté client
+      const response = await axios.post(
+        "https://vinted-projet-backend.herokuapp.com/payment",
+        // "http://localhost:3001/payment",
+        {
+          token: stripeToken,
+          title: article.product_name,
+          amount: article.product_price,
         }
+      );
+      console.log(`response.status : ${response.status}`);
+      if (response.status === 200) {
+        setSucceeded(true);
       }
+      // }
     } catch (error) {
       console.log(error.message);
     }
